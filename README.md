@@ -32,6 +32,9 @@ Tools & app using:
 ## Stage 1: Initiation and Source preparation
 
 - Nextjs installation `npx create-next-app@latest`
+- shadcn setup:
+  - `npx shadcn@latest init -d`
+  - `npx shadcn@latest add button`
 
 ## Stage 2: Realtime module with liveblocks
 
