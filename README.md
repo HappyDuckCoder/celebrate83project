@@ -35,6 +35,10 @@ Tools & app using:
 
 ## Stage 2: Realtime module with liveblocks
 
+- Liveblocks setup:
+  - `npm install @liveblocks/client @liveblocks/react`
+  - `npx create-liveblocks-app@latest --init --framework react`
+
 ## Stage 3: Frontend animation
 
 ## Stage 4: Testing
