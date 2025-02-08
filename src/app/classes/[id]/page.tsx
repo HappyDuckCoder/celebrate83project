@@ -2,7 +2,7 @@ import CollaborativeRoom from "@/components/CollaborativeRoom";
 import { getDocument } from "@/lib/action/room.action";
 import React from "react";
 
-const Classes = async ({ params: { id } }: { params: { id: string } }) => {
+const Classes = async ({ params: { id } }: SearchParamProps) => {
   const room = await getDocument({
     roomId: id,
   });

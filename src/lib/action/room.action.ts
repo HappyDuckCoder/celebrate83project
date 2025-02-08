@@ -5,6 +5,7 @@ import { liveblocks } from "../liveblocks";
 import { redirect } from "next/navigation";
 import { parseStringify } from "../utils";
 import { revalidatePath } from "next/cache";
+import { LiveList } from "@liveblocks/client";
 
 export const createDocument = async () => {
   const roomId = nanoid();
