@@ -7,8 +7,10 @@ const Classes = async ({ params: { id } }: { params: { id: string } }) => {
     roomId: id,
   });
 
+  if (!room) return <div>room not found</div>;
+
   return (
-    <main className="flex w-full flex-col items-center">
+    <main>
       <CollaborativeRoom roomId={id} roomMetadata={room.metadata} />
     </main>
   );
