@@ -52,7 +52,7 @@ function RoomContent() {
       <WhoIsHere />
       <Input
         type="text"
-        placeholder="What needs to be done?"
+        placeholder="Your wishes"
         value={draft}
         onChange={(e) => {
           setDraft(e.target.value);
