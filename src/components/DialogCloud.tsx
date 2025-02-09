@@ -13,14 +13,28 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { useRouter } from "next/navigation";
+import { createDocument } from "@/lib/action/room.action";
 
-const DialogCloud = ({
-  text,
-  onClickFunction,
-}: {
-  text: string;
-  onClickFunction: () => void;
-}) => {
+const DialogCloud = ({ text }: { text: string }) => {
+  const [userName, setUserName] = React.useState<string>("");
+  const [title, setTitle] = React.useState<string>("");
+
+  const router = useRouter();
+  const handleCreateRoom = async ({
+    title,
+    createUserName,
+  }: {
+    title: string;
+    createUserName: string;
+  }) => {
+    try {
+      const room = await createDocument({ title, createUserName });
+      if (room) router.push(`/classes/${room.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <AlertDialog>
@@ -28,18 +42,26 @@ const DialogCloud = ({
           {text}
         </AlertDialogTrigger>
         <AlertDialogContent>
-          <AlertDialogHeader>
+          <AlertDialogHeader className="flex flex-col gap-3">
             <AlertDialogTitle>Tạo vườn hoa</AlertDialogTitle>
             <div className="grid w-full max-w-sm items-center gap-1.5">
               <Label htmlFor="Tên vườn">Tên vườn</Label>
-              <Input type="Tên vườn" id="Tên vườn" placeholder="Tên vườn" />
+              <Input
+                type="Text"
+                id="Tên vườn"
+                placeholder="Tên vườn"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
               <Label htmlFor="Tên của bạn">Tên của bạn</Label>
               <Input
-                type="Tên của bạn"
+                type="text"
                 id="Tên của bạn"
                 placeholder="Tên của bạn"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
               />
             </div>
           </AlertDialogHeader>
@@ -49,7 +71,9 @@ const DialogCloud = ({
             </AlertDialogCancel>
             <AlertDialogAction
               className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-md transition"
-              onClick={onClickFunction}
+              onClick={() =>
+                handleCreateRoom({ title, createUserName: userName })
+              }
             >
               Continue
             </AlertDialogAction>

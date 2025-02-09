@@ -7,14 +7,7 @@ import Cloud from "@/components/Cloud";
 
 const Home = () => {
   const router = useRouter();
-  const handleCreateRoom = async () => {
-    try {
-      const room = await createDocument();
-      if (room) router.push(`/classes/${room.id}`);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   const handleGetRooms = () => {
     router.push("/classes");
   };
@@ -24,9 +17,7 @@ const Home = () => {
       <div className="text-center">
         <h1
           className="text-2xl font-bold"
-          style={{
-            fontFamily: "Kalam, cursive",
-          }}
+          style={{ fontFamily: "Kalam, cursive" }}
         >
           HAPPY VIETNAMESE WOMEN'S DAY
         </h1>
@@ -36,11 +27,11 @@ const Home = () => {
         >
           23CLC02
         </h2>
-        <div className="mt-4 flex gap-12 justify-center">
+        <div className="mt-4 flex gap-12 justify-center items-center">
           <Cloud
             text="Tạo vượt hoa"
             imglink={"/png/cloudright.png"}
-            onClickFunction={handleCreateRoom}
+            onClickFunction={() => {}}
             isCreateRoom={true}
           />
           <Cloud
