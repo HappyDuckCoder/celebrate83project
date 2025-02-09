@@ -13,12 +13,13 @@ import { LiveList, LiveObject } from "@liveblocks/client";
 import { ClientSideSuspense } from "@liveblocks/react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import Loading from "./Loading";
 
 function WhoIsHere() {
   const userCount = useOthers((others) => others.length);
 
   return (
-    <div className="who_is_here">There are {userCount} other users online</div>
+    <div className="who_is_here">Đang có {userCount + 1} người đang ở đây</div>
   );
 }
 
@@ -29,7 +30,7 @@ function SomeoneIsTyping() {
 
   return (
     <div className="someone_is_typing">
-      {someoneIsTyping ? "Someone is typing..." : ""}
+      {someoneIsTyping ? "Ai đó đang ghi chú..." : ""}
     </div>
   );
 }
@@ -50,9 +51,10 @@ function RoomContent() {
   return (
     <div className="container">
       <WhoIsHere />
+      <SomeoneIsTyping />
       <Input
         type="text"
-        placeholder="Your wishes"
+        placeholder="Lời chúc của bạn"
         value={draft}
         onChange={(e) => {
           setDraft(e.target.value);
@@ -67,7 +69,7 @@ function RoomContent() {
         }}
         onBlur={() => updateMyPresence({ isTyping: false })}
       />
-      <SomeoneIsTyping />
+
       {wish.map((todo, index) => {
         return (
           <div key={index} className="todo_container">
@@ -99,7 +101,7 @@ const CollaborativeRoom = ({
       }}
       initialStorage={{ wish: new LiveList([]) }}
     >
-      <ClientSideSuspense fallback={<div>Loading...</div>}>
+      <ClientSideSuspense fallback={<Loading />}>
         <div>{roomMetadata.title}</div>
         <RoomContent />
       </ClientSideSuspense>
