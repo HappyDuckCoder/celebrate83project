@@ -2,7 +2,6 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { createDocument } from "@/lib/action/room.action";
 import Cloud from "@/components/Cloud";
 
 const Home = () => {
