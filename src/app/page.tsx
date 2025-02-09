@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { createDocument } from "@/lib/action/room.action";
@@ -11,11 +10,13 @@ const Home = () => {
   const handleCreateRoom = async () => {
     try {
       const room = await createDocument();
-
       if (room) router.push(`/classes/${room.id}`);
     } catch (error) {
       console.log(error);
     }
+  };
+  const handleGetRooms = () => {
+    router.push("/classes");
   };
 
   return (
@@ -40,11 +41,13 @@ const Home = () => {
             text="Tạo vượt hoa"
             imglink={"/png/cloudright.png"}
             onClickFunction={handleCreateRoom}
+            isCreateRoom={true}
           />
           <Cloud
-            text="Trồng hoa"
+            text="Xem các vượt hoa"
             imglink={"/png/cloudleft.png"}
-            onClickFunction={() => {}}
+            onClickFunction={handleGetRooms}
+            isCreateRoom={false}
           />
         </div>
       </div>
