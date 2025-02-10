@@ -84,16 +84,16 @@ const FloatingWishes = ({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
               transition={{ duration: 0.4, type: "spring", stiffness: 120 }}
-              className="p-3 rounded-lg flex items-center space-x-2 pointer-events-auto cursor-move relative"
+              className="p-3 rounded-lg flex items-center space-x-2 pointer-events-auto cursor-pointer relative z-1"
               onMouseEnter={() => setHoverIndex(index)}
               onMouseLeave={() => setHoverIndex(null)}
             >
               {/* Ảnh hoa */}
-              <Avatar className="border-none">
+              <Avatar className="hover:animate-[custom-spin_1s_linear_infinite]">
                 <AvatarImage
                   src={`/png/flower${wish.imgIndex}.png`}
                   alt={`Flower ${wish.imgIndex}`}
-                  className="pointer-events-none"
+                  className="pointer-events-none  "
                 />
                 <AvatarFallback>🌸</AvatarFallback>
               </Avatar>
@@ -115,7 +115,7 @@ const FloatingWishes = ({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="absolute left-full ml-2 px-3 py-1 bg-white shadow-lg rounded-md text-gray-700 text-sm"
+                  className="absolute w-64 z-0 font-serif left-full ml-2 px-3 py-1 bg-white shadow-lg rounded-md text-gray-700 text-sm"
                 >
                   {wish.text}
                 </motion.div>

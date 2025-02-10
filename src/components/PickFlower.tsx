@@ -26,7 +26,7 @@ const PickFlower = ({
             <AvatarImage
               src={`/png/flower${i}.png`}
               alt={`Flower ${i}`}
-              className="hover:animate-[wiggle_0.5s_ease-in-out_infinite]"
+              className="hover:animate-[custom-spin_1s_linear_infinite]"
             />
             <AvatarFallback>🌸</AvatarFallback>
           </Avatar>
