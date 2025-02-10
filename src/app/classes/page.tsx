@@ -26,6 +26,7 @@ const ClassesPage = () => {
     setError(null);
     try {
       const response = await getDocuments();
+      // *NODE: TEST OUTPUT
       //   console.log(response);
 
       if (response && Array.isArray(response.data)) {

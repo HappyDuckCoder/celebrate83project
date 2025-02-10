@@ -18,7 +18,7 @@ const Home = () => {
           className="text-2xl font-bold"
           style={{ fontFamily: "Kalam, cursive" }}
         >
-          HAPPY VIETNAMESE WOMEN'S DAY
+          HAPPY VIETNAMESE WOMEN&apos;S DAY
         </h1>
         <h2
           className="text-2xl font-bold"

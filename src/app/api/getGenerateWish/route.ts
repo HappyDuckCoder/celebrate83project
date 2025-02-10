@@ -1,14 +1,14 @@
 import { generateObject } from "ai";
 import { createOpenAI as createGroq } from "@ai-sdk/openai";
 import { z } from "zod";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 const groq = createGroq({
   baseURL: "https://api.groq.com/openai/v1",
   apiKey: process.env.GROQ_API_KEY,
 });
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     const { object } = await generateObject({
       model: groq("deepseek-r1-distill-llama-70b"),

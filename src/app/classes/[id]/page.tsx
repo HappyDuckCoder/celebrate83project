@@ -4,7 +4,7 @@ import React from "react";
 
 //  !BUGG: FIX BUG AWAIT PARAMS THIS PAGE
 
-const Classes = async ({ params: { id } }: SearchParamProps) => {
+const Classes = async ({ params: { id } }: { params: { id: string } }) => {
   const room = await getDocument({
     roomId: id,
   });
@@ -12,7 +12,7 @@ const Classes = async ({ params: { id } }: SearchParamProps) => {
   if (!room) return <div>không tìm thấy phòng này</div>;
 
   return (
-    <main className="flex h-screen w-[50%] flex-col pt-24">
+    <main className="flex h-screen w-[75%] flex-col pt-24">
       <CollaborativeRoom roomId={id} roomMetadata={room.metadata} />
     </main>
   );

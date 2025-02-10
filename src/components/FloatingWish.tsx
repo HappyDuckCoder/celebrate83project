@@ -4,7 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Draggable from "react-draggable";
-import { Button } from "./ui/button";
+import { DraggableEvent, DraggableData } from "react-draggable";
+// import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const getRandomPosition = () => ({
@@ -19,10 +20,9 @@ const DraggableWrapper = ({
 }: {
   children: React.ReactNode;
   position: { x: number; y: number };
-  onDrag?: (e: any, data: { x: number; y: number }) => void;
+  onDrag?: (e: DraggableEvent, data: DraggableData) => void;
 }) => {
-  // *NODE: CAREFUL ANY TYPE
-  const nodeRef: any = useRef(null);
+  const nodeRef = useRef<HTMLDivElement>(null!);
 
   return (
     <Draggable nodeRef={nodeRef} position={position} onDrag={onDrag}>
@@ -35,10 +35,10 @@ const DraggableWrapper = ({
 
 const FloatingWishes = ({
   wishes,
-  onDelete,
-}: {
+}: //   onDelete,
+{
   wishes: { text: string; imgIndex: number }[];
-  onDelete: (index: number) => void;
+  //   onDelete: (index: number) => void;
 }) => {
   const [mounted, setMounted] = useState(false);
   const [positions, setPositions] = useState<{ x: number; y: number }[]>([]);

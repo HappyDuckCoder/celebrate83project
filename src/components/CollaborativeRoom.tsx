@@ -47,9 +47,9 @@ function RoomContent({ title }: { title: string }) {
     storage.get("wish").push(new LiveObject({ text, imgIndex }));
   }, []);
 
-  const deleteWish = useMutation(({ storage }, index) => {
-    storage.get("wish").delete(index);
-  }, []);
+  // const deleteWish = useMutation(({ storage }, index) => {
+  //   storage.get("wish").delete(index);
+  // }, []);
 
   const addWishByButton = () => {
     if (!draft) return;
@@ -126,7 +126,7 @@ function RoomContent({ title }: { title: string }) {
 
       <FloatingWishes
         wishes={wish.map((w) => ({ text: w.text, imgIndex: w.imgIndex }))}
-        onDelete={deleteWish}
+        // onDelete={deleteWish}
       />
     </div>
   );
@@ -137,7 +137,7 @@ const CollaborativeRoom = ({
   roomMetadata,
 }: {
   roomId: string;
-  roomMetadata: any;
+  roomMetadata: Record<string, string>;
 }) => {
   return (
     <RoomProvider
