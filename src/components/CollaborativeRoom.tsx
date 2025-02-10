@@ -20,7 +20,7 @@ function WhoIsHere() {
   const userCount = useOthers((others) => others.length);
   return (
     <div className="text-sm text-gray-500">
-      Đang có {userCount + 1} người trong phòng này.
+      👥 {userCount + 1} người đang ở đây.
     </div>
   );
 }
@@ -29,10 +29,9 @@ function SomeoneIsTyping() {
   const someoneIsTyping = useOthers((others) =>
     others.some((other) => other.presence.isTyping)
   );
-
   return (
     <div className="text-sm text-gray-500">
-      {someoneIsTyping ? "Ai đó đang ghi chú..." : ""}
+      {someoneIsTyping && "✍ Ai đó đang ghi chú..."}
     </div>
   );
 }
@@ -40,6 +39,7 @@ function SomeoneIsTyping() {
 function RoomContent({ title }: { title: string }) {
   const [draft, setDraft] = useState("");
   const [flowerPick, setFlowerPick] = useState(1);
+  const [loadingAI, setLoadingAI] = useState(false);
   const updateMyPresence = useUpdateMyPresence();
   const wish = useStorage((root) => root.wish);
 
@@ -58,6 +58,9 @@ function RoomContent({ title }: { title: string }) {
   };
 
   const generateWish = useCallback(async () => {
+    setLoadingAI(true);
+    setDraft("");
+
     try {
       const response = await fetch("/api/getGenerateWish", {
         method: "POST",
@@ -67,9 +70,17 @@ function RoomContent({ title }: { title: string }) {
       if (!response.ok) return;
       const data = await response.json();
 
-      setDraft(data.Wish[0]); // Cập nhật state nhưng không ảnh hưởng đến render
+      // Hiển thị từng ký tự từ từ
+      let generatedText = "";
+      for (const char of data.Wish[0]) {
+        generatedText += char;
+        setDraft(generatedText);
+        await new Promise((res) => setTimeout(res, 50)); // Delay 50ms để tạo hiệu ứng gõ chữ
+      }
     } catch (error) {
       console.error("Error fetching AI wish:", error);
+    } finally {
+      setLoadingAI(false);
     }
   }, []);
 
@@ -80,10 +91,14 @@ function RoomContent({ title }: { title: string }) {
       <SomeoneIsTyping />
 
       <div className="flex space-x-2">
+        {/* 
+          // *NODE: LÀM THÊM HIỆU ỨNG WORD-BREAK
+        */}
         <Input
           type="text"
-          placeholder="Lời hay ý đẹp"
+          placeholder="🌸 Nhập lời hay ý đẹp..."
           value={draft}
+          disabled={loadingAI}
           onChange={(e) => {
             setDraft(e.target.value);
             updateMyPresence({ isTyping: true });
@@ -96,10 +111,15 @@ function RoomContent({ title }: { title: string }) {
             }
           }}
           onBlur={() => updateMyPresence({ isTyping: false })}
-          className="border border-gray-300 p-2 rounded-md"
+          className="border border-gray-300 p-2 rounded-md break-words"
+          style={{ wordBreak: "break-word" }} // Ngắt dòng tự động
         />
-        <Button onClick={addWishByButton}>Khen đi</Button>
-        <Button onClick={generateWish}>Nhờ AI giúp khum</Button>
+        <Button onClick={addWishByButton} disabled={loadingAI}>
+          💖 Gửi
+        </Button>
+        <Button onClick={generateWish} disabled={loadingAI}>
+          {loadingAI ? "🤖 Đang tạo..." : "✨ Nhờ AI giúp"}
+        </Button>
       </div>
 
       <PickFlower flowerPick={flowerPick} setFlowerPick={setFlowerPick} />
