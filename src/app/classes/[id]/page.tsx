@@ -1,15 +1,13 @@
 import CollaborativeRoom from "@/components/CollaborativeRoom";
 import { getDocument } from "@/lib/action/room.action";
-import React from "react";
+import React, { use } from "react";
 
-//  !BUGG: FIX BUG AWAIT PARAMS THIS PAGE
+const Classes = ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = use(params);
 
-const Classes = async ({ params: { id } }: { params: { id: string } }) => {
-  const room = await getDocument({
-    roomId: id,
-  });
+  const room = use(getDocument({ roomId: id }));
 
-  if (!room) return <div>không tìm thấy phòng này</div>;
+  if (!room) return <div>Không tìm thấy phòng này</div>;
 
   return (
     <main className="flex h-screen w-[75%] flex-col pt-24">
