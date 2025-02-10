@@ -2,6 +2,7 @@ import type { LiveList, LiveObject } from "@liveblocks/client";
 
 type Wish = {
   text: string;
+  imgIndex: number;
 };
 
 declare global {
