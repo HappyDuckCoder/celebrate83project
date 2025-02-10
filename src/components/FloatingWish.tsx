@@ -21,9 +21,8 @@ const DraggableWrapper = ({
   position: { x: number; y: number };
   onDrag?: (e: any, data: { x: number; y: number }) => void;
 }) => {
-  const nodeRef = useRef(null);
-
-  // !BUGG: FIX NODEREF HERE
+  // *NODE: CAREFUL ANY TYPE
+  const nodeRef: any = useRef(null);
 
   return (
     <Draggable nodeRef={nodeRef} position={position} onDrag={onDrag}>
@@ -90,13 +89,11 @@ const FloatingWishes = ({
               onMouseLeave={() => setHoverIndex(null)}
             >
               {/* Ảnh hoa */}
-              {/*
-                // !BUGG: FIX IMAGE DRAG HERE
-              */}
               <Avatar className="border-none">
                 <AvatarImage
                   src={`/png/flower${wish.imgIndex}.png`}
                   alt={`Flower ${wish.imgIndex}`}
+                  className="pointer-events-none"
                 />
                 <AvatarFallback>🌸</AvatarFallback>
               </Avatar>
