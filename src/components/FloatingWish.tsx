@@ -101,6 +101,9 @@ const FloatingWishes = ({
                 <AvatarFallback>🌸</AvatarFallback>
               </Avatar>
 
+              {
+                // *NOTE: USE FOR DELETE WISH IF NEED
+              }
               {/* <Button
                 className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition"
                 onClick={() => onDelete(index)}
