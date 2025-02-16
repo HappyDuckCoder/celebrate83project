@@ -32,8 +32,15 @@ Tools & app using:
 ## Stage 1: Initiation and Source preparation
 
 - Nextjs installation `npx create-next-app@latest`
+- shadcn setup:
+  - `npx shadcn@latest init -d`
+  - `npx shadcn@latest add button`
 
 ## Stage 2: Realtime module with liveblocks
+
+- Liveblocks setup:
+  - `npm install @liveblocks/client @liveblocks/react`
+  - `npx create-liveblocks-app@latest --init --framework react`
 
 ## Stage 3: Frontend animation
 
