@@ -28,13 +28,13 @@ const Home = () => {
         </h2>
         <div className="mt-4 flex gap-12 justify-center items-center">
           <Cloud
-            text="Tạo vượt hoa"
+            text="Tạo vườn hoa"
             imglink={"/png/cloudright.png"}
             onClickFunction={() => {}}
             isCreateRoom={true}
           />
           <Cloud
-            text="Xem các vượt hoa"
+            text="Xem các vườn hoa"
             imglink={"/png/cloudleft.png"}
             onClickFunction={handleGetRooms}
             isCreateRoom={false}

@@ -1,11 +1,9 @@
 import React from "react";
-
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  // AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
@@ -15,26 +13,35 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { useRouter } from "next/navigation";
 import { createDocument } from "@/lib/action/room.action";
+import Select from "./ui/Select";
+import { currentUser } from "@clerk/nextjs/server";
+import { getCurrentUser } from "@/lib/action/user.action";
 
 const DialogCloud = ({ text }: { text: string }) => {
-  const [userName, setUserName] = React.useState<string>("");
-  const [title, setTitle] = React.useState<string>("");
+  const [gardenName, setGardenName] = React.useState<string>("");
+  const [privacy, setPrivacy] = React.useState<string>("public");
 
-  const router = useRouter();
-  const handleCreateRoom = async ({
-    title,
-    createUserName,
-  }: {
-    title: string;
-    createUserName: string;
-  }) => {
-    try {
-      const room = await createDocument({ title, createUserName });
-      if (room) router.push(`/classes/${room.id}`);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const clerkUser = getCurrentUser();
+
+  console.log(clerkUser);
+
+  // const handleCreateRoom = async ({
+  //   title,
+  //   clerkUser,
+  //   isPrivate,
+  // }: {
+  //   title: string;
+  //   createUserName: string;
+  //   isPrivate: boolean;
+  // }) => {
+  //   try {
+  //     const room = await createDocument({ title, clerkUser, isPrivate });
+  //     if (room) router.push(`/classes/${room.id}`);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   return (
     <>
       <AlertDialog>
@@ -44,25 +51,24 @@ const DialogCloud = ({ text }: { text: string }) => {
         <AlertDialogContent>
           <AlertDialogHeader className="flex flex-col gap-3">
             <AlertDialogTitle>Tạo vườn hoa</AlertDialogTitle>
+
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="Tên vườn">Tên vườn</Label>
-              <Input
-                type="Text"
-                id="Tên vườn"
-                placeholder="Tên vườn"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </div>
-            <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="Tên của bạn">Tên của bạn</Label>
+              <Label htmlFor="gardenName">Tên vườn</Label>
               <Input
                 type="text"
-                id="Tên của bạn"
-                placeholder="Tên của bạn"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
+                id="gardenName"
+                placeholder="Tên vườn"
+                value={gardenName}
+                onChange={(e) => setGardenName(e.target.value)}
               />
+            </div>
+
+            <div className="grid w-full max-w-sm items-center gap-1.5">
+              <Label htmlFor="privacy">Quyền riêng tư</Label>
+              <Select id="privacy" value={privacy} onValueChange={setPrivacy}>
+                <option value="public">Công khai</option>
+                <option value="private">Riêng tư</option>
+              </Select>
             </div>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -71,9 +77,13 @@ const DialogCloud = ({ text }: { text: string }) => {
             </AlertDialogCancel>
             <AlertDialogAction
               className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-md transition"
-              onClick={() =>
-                handleCreateRoom({ title, createUserName: userName })
-              }
+              // onClick={() =>
+              //   handleCreateRoom({
+              //     title: gardenName,
+              //     createUserName: userName,
+              //     isPrivate: privacy === "private", // Convert to boolean
+              //   })
+              // }
             >
               Continue
             </AlertDialogAction>
