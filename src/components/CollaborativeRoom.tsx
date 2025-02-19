@@ -135,9 +135,13 @@ function RoomContent({ title }: { title: string }) {
 const CollaborativeRoom = ({
   roomId,
   roomMetadata,
+  users,
+  currentUserType,
 }: {
   roomId: string;
-  roomMetadata: Record<string, string>;
+  roomMetadata: RoomMetadata;
+  users: User[];
+  currentUserType: UserType;
 }) => {
   return (
     <RoomProvider
