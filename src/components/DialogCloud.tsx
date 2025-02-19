@@ -31,6 +31,9 @@ const DialogCloud = ({ text }: { text: string }) => {
       return;
     }
 
+    // *NODE: DEBUGGING
+    // console.log(user_);
+
     try {
       const room = await createDocument({
         title: gardenName,
@@ -42,6 +45,7 @@ const DialogCloud = ({ text }: { text: string }) => {
       if (room) {
         // *NODE: DEBUGGING LINE
         console.log(room);
+
         router.push(`/classes/${room.id}`);
       }
     } catch (error) {

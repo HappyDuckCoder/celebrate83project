@@ -96,7 +96,7 @@ function RoomContent({ title }: { title: string }) {
         */}
         <Input
           type="text"
-          placeholder="🌸 Nhập lời hay ý đẹp..."
+          placeholder="🌸 Lời hay ý đẹp..."
           value={draft}
           disabled={loadingAI}
           onChange={(e) => {
@@ -135,13 +135,9 @@ function RoomContent({ title }: { title: string }) {
 const CollaborativeRoom = ({
   roomId,
   roomMetadata,
-  users,
-  currentUserType,
 }: {
   roomId: string;
   roomMetadata: RoomMetadata;
-  users: User[];
-  currentUserType: UserType;
 }) => {
   return (
     <RoomProvider
