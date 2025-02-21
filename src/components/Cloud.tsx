@@ -16,14 +16,14 @@ const Cloud = ({
     <>
       {isCreateRoom ? (
         <div
-          className="flex items-center justify-center w-64 h-20 bg-no-repeat bg-contain relative transition-all duration-300 hover:brightness-75 hover:animate-[wiggle_0.5s_ease-in-out_infinite]  overflow-hidden"
+          className="flex items-center justify-center w-64 h-20 bg-no-repeat bg-contain relative transition-all duration-300 hover:brightness-75 hover:animate-[wiggle_0.5s_ease-in-out_infinite] overflow-hidden"
           style={{ backgroundImage: `url('${imglink}')` }}
         >
           <DialogCloud text={text} />
         </div>
       ) : (
         <div
-          className="flex items-center justify-center w-64 h-20 bg-no-repeat bg-contain relative transition-all duration-300 hover:brightness-75 hover:animate-[wiggle_0.5s_ease-in-out_infinite]  overflow-hidden"
+          className="flex items-center justify-center w-64 h-20 bg-no-repeat bg-contain relative transition-all duration-300 hover:brightness-75 hover:animate-[wiggle_0.5s_ease-in-out_infinite] overflow-hidden"
           style={{ backgroundImage: `url('${imglink}')` }}
           onClick={onClickFunction}
         >
