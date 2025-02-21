@@ -59,6 +59,18 @@ export default {
             boxShadow: {
                 custom: "3px 5px 0 rgba(0, 0, 0, .3), 3px 5px 0 var(--color-bar, #ff3333), 8px 7px 0 2px rgba(0, 0, 0, .24)",
             },
+            dropShadow: {
+                custom: "0 2px 0 rgba(0, 0, 0, .25)",
+                custom2:
+                    "0 1px 0 rgba(0, 0, 0, .33), 0 1px 3px rgba(0, 0, 0, .2)",
+            },
+
+            rotate: {
+                "-3": "-3deg",
+            },
+            skew: {
+                "-4": "-4deg",
+            },
         },
     },
     plugins: [require("tailwindcss-animate")],

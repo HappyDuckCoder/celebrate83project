@@ -19,15 +19,15 @@ const Home = () => {
         // setSoundOff(new Audio("/sounds/soundOff.mp3"));
     }, []);
 
-    const toggleSound = () => {
-        setToggled(!toggled);
+    // const toggleSound = () => {
+    //     setToggled(!toggled);
 
-        // if (toggled && soundOff) {
-        //     soundOff.play();
-        // } else if (!toggled && soundOn) {
-        //     soundOn.play();
-        // }
-    };
+    //     if (toggled && soundOff) {
+    //         soundOff.play();
+    //     } else if (!toggled && soundOn) {
+    //         soundOn.play();
+    //     }
+    // };
 
     const router = useRouter();
 
@@ -74,16 +74,18 @@ const Home = () => {
                     <div className="h-5 w-5 bg-red-600"></div>
                 </header>
             </div>
-            <div className="text-center flex flex-col items-center relative box-border z-0 w-full pt-8">
-                <h1 className={`${lobster.className}`}>
+            <div className="text-center flex flex-col items-center relative box-border z-0 w-full pt-8 mt-20">
+                <h1
+                    className={`${lobster.className} font-normal text-5xl text-white my-3 mx-1 drop-shadow-custom transform rotate--3 skew--4`}
+                >
                     Happy Women&apos;s Day
                 </h1>
-
-                <p className={`${poppins.className}`}>
+                <p
+                    className={`${poppins.className} font-medium text-xl drop-shadow-custom2 text-white`}
+                >
                     Chung tay tạo lời chúc cùng những bông hoa nhân dịp 8/3
                 </p>
-
-                <div className="mt-4 flex gap-12 justify-center items-center">
+                <div className="mt-20 flex gap-14 justify-center items-center">
                     <Cloud
                         text="Tạo vườn hoa"
                         imglink={"/png/cloudright.png"}
