@@ -10,11 +10,11 @@ declare type RoomAccesses = Record<string, AccessType>;
 
 declare type UserType = "creator" | "editor" | "viewer";
 
-declare type RoomMetadata = {
-  creatorId: string;
-  email: string;
-  title: string;
-};
+// declare type RoomMetadata = {
+//   creatorId: string;
+//   email: string;
+//   title: string;
+// };
 
 declare type CreateDocumentParams = {
   userId: string;
@@ -80,3 +80,21 @@ declare type DeleteModalProps = { roomId: string };
 declare type ThreadWrapperProps = { thread: ThreadData<BaseMetadata> };
 
 declare type ClerkUser = {};
+
+declare type RoomMetadata = {
+  title: string;
+  userEmail: string;
+  creatorId: string;
+};
+
+declare type Room = {
+  id: string;
+  metadata: RoomMetadata;
+};
+
+declare type RoomMetadata = {
+  title: string;
+  userEmail: string;
+  creatorId: string;
+  email: string;
+};

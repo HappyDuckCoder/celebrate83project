@@ -12,9 +12,9 @@ const masterRoomId =
   process.env.NEXT_PUBLIC_MASTER_ROOM_ID || "mWu2Vaq7Mn9QFKeHV7sqU";
 
 const RoomMetadataOfMasterRoom = {
-  creatorId: "duckilot",
-  email: "prto2802@gmail.com",
   title: "Master Room",
+  userEmail: "prto2802@gmail.com",
+  creatorId: "duckilot",
 };
 
 type Room = {
