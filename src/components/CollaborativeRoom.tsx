@@ -74,12 +74,11 @@ function RoomContent({ title }: { title: string }) {
       if (!response.ok) return;
       const data = await response.json();
 
-      // Hiển thị từng ký tự từ từ
       let generatedText = "";
       for (const char of data.Wish[0]) {
         generatedText += char;
         setDraft(generatedText);
-        await new Promise((res) => setTimeout(res, 50)); // Delay 50ms để tạo hiệu ứng gõ chữ
+        await new Promise((res) => setTimeout(res, 50));
       }
     } catch (error) {
       console.error("Error fetching AI wish:", error);
@@ -119,7 +118,7 @@ function RoomContent({ title }: { title: string }) {
           }}
           onBlur={() => updateMyPresence({ isTyping: false })}
           className="border border-gray-300 p-2 rounded-md break-words"
-          style={{ wordBreak: "break-word" }} // Ngắt dòng tự động
+          style={{ wordBreak: "break-word" }}
         />
         <Button onClick={addWishByButton} disabled={loadingAI}>
           💖 Gửi

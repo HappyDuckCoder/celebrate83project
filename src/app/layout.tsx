@@ -19,12 +19,10 @@ export default function RootLayout({
           <link rel="icon" href="/avif/header.avif" />
         </head>
         <body className="relative h-screen w-screen">
-          {/* Nút đăng nhập góc trên phải */}
           <div className="absolute top-4 right-4">
             <LoginButton />
           </div>
 
-          {/* Background với overlay */}
           <div
             className="h-screen w-screen bg-cover bg-center flex items-center justify-center"
             style={{ backgroundImage: "url('/png/bg.png')" }}
