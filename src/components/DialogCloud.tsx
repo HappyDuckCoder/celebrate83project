@@ -31,22 +31,16 @@ const DialogCloud = ({ text }: { text: string }) => {
       return;
     }
 
-    // *NODE: DEBUGGING
-    // console.log(user_);
-
     try {
       const room = await createDocument({
         title: gardenName,
         userId: user_.id,
         userEmail: user_.email,
-        isPrivate: privacy === "private",
       });
 
       if (room) {
         // *NODE: DEBUGGING LINE
         console.log(room);
-
-        router.push(`/classes/${room.id}`);
       }
     } catch (error) {
       console.error("Failed to create room:", error);

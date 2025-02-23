@@ -4,6 +4,7 @@ import { deleteDocument, getDocuments } from "@/lib/action/room.action";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
+// *TODO: Quăng vào index.d.ts sau
 type Room = {
   type: string;
   id: string;

@@ -16,6 +16,10 @@ import FloatingWishes from "./FloatingWish";
 import PickFlower from "./PickFlower";
 import { Button } from "./ui/button";
 
+// *NOTE: id master room: mWu2Vaq7Mn9QFKeHV7sqU
+// *TODO: để trong local env sau
+const masterRoomTitle = "Master Room";
+
 function WhoIsHere() {
   const userCount = useOthers((others) => others.length);
   return (
@@ -86,7 +90,10 @@ function RoomContent({ title }: { title: string }) {
 
   return (
     <div className="container flex flex-col space-y-4 p-6 max-w-lg mx-auto">
-      <h2 className="text-2xl font-semibold">{title}</h2>
+      {title !== masterRoomTitle && (
+        <h2 className="text-2xl font-semibold">{title}</h2>
+      )}
+
       <WhoIsHere />
       <SomeoneIsTyping />
 

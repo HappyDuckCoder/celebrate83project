@@ -9,12 +9,10 @@ export const createDocument = async ({
   title,
   userId,
   userEmail,
-  isPrivate,
 }: {
   title: string;
   userId: string;
   userEmail: string;
-  isPrivate: boolean;
 }) => {
   const roomId = nanoid();
 
@@ -25,18 +23,9 @@ export const createDocument = async ({
       title,
     };
 
-    const usersAccesses: RoomAccesses = isPrivate
-      ? { [userEmail]: ["room:write"] }
-      : {
-          [userEmail]: ["room:write"],
-          "*": ["room:read", "room:presence:write"],
-        };
-    // Nếu public, mọi người đều có quyền đọc và presence
-
     const room = await liveblocks.createRoom(roomId, {
       metadata,
-      usersAccesses,
-      defaultAccesses: ["room:read", "room:presence:write"],
+      defaultAccesses: ["room:write"],
     });
 
     revalidatePath("/");
@@ -48,25 +37,9 @@ export const createDocument = async ({
   }
 };
 
-export const getDocument = async ({
-  roomId,
-  userEmail,
-}: {
-  roomId: string;
-  userEmail: string;
-}) => {
+export const getDocument = async ({ roomId }: { roomId: string }) => {
   try {
     const room = await liveblocks.getRoom(roomId);
-
-    const hasAccess = Object.keys(room.usersAccesses).includes(userEmail);
-
-    // *NOTE: DEBUGGING
-    console.log("is access: ", hasAccess);
-    console.log(room);
-
-    if (!hasAccess) {
-      throw new Error("You do not have access to this document");
-    }
 
     return parseStringify(room);
   } catch (error) {
