@@ -44,6 +44,12 @@ const FloatingWishes = ({
   const [positions, setPositions] = useState<{ x: number; y: number }[]>([]);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
 
+  const [blooming, setBlooming] = useState(false);
+
+  useEffect(() => {
+    setBlooming(true);
+  }, []);
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -83,7 +89,13 @@ const FloatingWishes = ({
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
-              transition={{ duration: 0.4, type: "spring", stiffness: 120 }}
+              transition={{
+                duration: 1.5,
+                type: "spring",
+                stiffness: 50,
+                damping: 10,
+                delay: index * 0.1,
+              }}
               className="p-3 rounded-lg flex items-center space-x-2 pointer-events-auto cursor-pointer relative z-1"
               onMouseEnter={() => setHoverIndex(index)}
               onMouseLeave={() => setHoverIndex(null)}

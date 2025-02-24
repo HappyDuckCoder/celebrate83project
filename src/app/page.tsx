@@ -1,14 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CollaborativeRoom from "@/components/CollaborativeRoom";
-import { Button } from "@/components/ui/button";
 import { getCurrentUser } from "@/lib/action/user.action";
 import { createDocument, getDocuments } from "@/lib/action/room.action";
-import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
-import LoginButton from "@/components/LoginButton";
 import RoomControls from "@/components/RoomControl";
+import HelloScreen from "@/components/HelloScreen";
 
 const masterRoomId =
   process.env.NEXT_PUBLIC_MASTER_ROOM_ID || "mWu2Vaq7Mn9QFKeHV7sqU";
@@ -34,11 +32,21 @@ type RoomData = {
 };
 
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(true); // Thêm state để kiểm soát loading
   const [nameGarden, setNameGarden] = useState<string>("");
   const [idGarden, setIdGarden] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+
+  // Hiển thị HelloScreen trong 2.5s trước khi vào trang chính
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleCreateRoom = async () => {
     if (!nameGarden.trim()) {
@@ -94,6 +102,10 @@ const Home = () => {
 
     router.push(`/classes/${idGarden}`);
   };
+
+  if (isLoading) {
+    return <HelloScreen />;
+  }
 
   return (
     <main className="flex h-full flex-col items-center pt-16">

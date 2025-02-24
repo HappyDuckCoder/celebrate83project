@@ -1,5 +1,4 @@
-"use client";
-
+// CollaborativeRoom.tsx
 import { useState, useCallback } from "react";
 import {
   RoomProvider,
@@ -16,8 +15,6 @@ import FloatingWishes from "./FloatingWish";
 import PickFlower from "./PickFlower";
 import { Button } from "./ui/button";
 
-// *NOTE: id master room: mWu2Vaq7Mn9QFKeHV7sqU
-// *TODO: để trong local env sau
 const masterRoomTitle = "Master Room";
 
 function WhoIsHere() {
@@ -50,10 +47,6 @@ function RoomContent({ title }: { title: string }) {
   const addWish = useMutation(({ storage }, text, imgIndex) => {
     storage.get("wish").push(new LiveObject({ text, imgIndex }));
   }, []);
-
-  // const deleteWish = useMutation(({ storage }, index) => {
-  //   storage.get("wish").delete(index);
-  // }, []);
 
   const addWishByButton = () => {
     if (!draft) return;
@@ -97,9 +90,6 @@ function RoomContent({ title }: { title: string }) {
       <SomeoneIsTyping />
 
       <div className="flex space-x-2">
-        {/* 
-          // *NODE: LÀM THÊM HIỆU ỨNG WORD-BREAK
-        */}
         <Input
           type="text"
           placeholder="🌸 Lời hay ý đẹp..."
@@ -132,7 +122,6 @@ function RoomContent({ title }: { title: string }) {
 
       <FloatingWishes
         wishes={wish.map((w) => ({ text: w.text, imgIndex: w.imgIndex }))}
-        // onDelete={deleteWish}
       />
     </div>
   );
