@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Provider from "./Provider";
 import { ClerkProvider } from "@clerk/nextjs";
-import LoginButton from "@/components/LoginButton";
 
 export const metadata: Metadata = {
   title: "Happy Women Day",

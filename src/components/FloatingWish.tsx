@@ -44,12 +44,6 @@ const FloatingWishes = ({
   const [positions, setPositions] = useState<{ x: number; y: number }[]>([]);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
 
-  const [blooming, setBlooming] = useState(false);
-
-  useEffect(() => {
-    setBlooming(true);
-  }, []);
-
   useEffect(() => {
     setMounted(true);
   }, []);
