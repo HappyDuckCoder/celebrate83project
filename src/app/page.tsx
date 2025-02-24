@@ -7,6 +7,8 @@ import { getCurrentUser } from "@/lib/action/user.action";
 import { createDocument, getDocuments } from "@/lib/action/room.action";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import LoginButton from "@/components/LoginButton";
+import RoomControls from "@/components/RoomControl";
 
 const masterRoomId =
   process.env.NEXT_PUBLIC_MASTER_ROOM_ID || "mWu2Vaq7Mn9QFKeHV7sqU";
@@ -35,20 +37,20 @@ const Home = () => {
   const [nameGarden, setNameGarden] = useState<string>("");
   const [idGarden, setIdGarden] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const handleCreateRoom = async () => {
     if (!nameGarden.trim()) {
-      alert("Tên phòng không được để trống!");
+      setError("Tên phòng không được để trống!");
       return;
     }
-
     setLoading(true);
 
     try {
       const user_ = await getCurrentUser();
       if (!user_) {
-        alert("Bạn chưa đăng nhập!");
+        setError("Bạn chưa đăng nhập!");
         setLoading(false);
         return;
       }
@@ -61,7 +63,7 @@ const Home = () => {
         );
 
         if (existingRoom) {
-          alert("Bạn đã có một phòng rồi!");
+          setError("Bạn đã có một phòng rồi!");
           setLoading(false);
           return;
         }
@@ -78,7 +80,7 @@ const Home = () => {
       }
     } catch (error) {
       console.error("Lỗi khi tạo phòng:", error);
-      alert("Đã có lỗi xảy ra, vui lòng thử lại!");
+      setError("Đã có lỗi xảy ra, vui lòng thử lại!");
     } finally {
       setLoading(false);
     }
@@ -86,7 +88,7 @@ const Home = () => {
 
   const handleJoinRoom = async () => {
     if (!idGarden.trim()) {
-      alert("ID phòng không được từ trONGL!");
+      setError("ID phòng không được để trống!");
       return;
     }
 
@@ -94,7 +96,30 @@ const Home = () => {
   };
 
   return (
-    <main className="flex h-screen flex-col items-center pt-24">
+    <main className="flex h-full flex-col items-center pt-16">
+      <RoomControls
+        nameGarden={nameGarden}
+        setNameGarden={setNameGarden}
+        idGarden={idGarden}
+        setIdGarden={setIdGarden}
+        handleCreateRoom={handleCreateRoom}
+        handleJoinRoom={handleJoinRoom}
+        loading={loading}
+      />
+
+      {/* Popup lỗi */}
+      {error && (
+        <div className="absolute top-10 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-md">
+          {error}
+          <button
+            onClick={() => setError(null)}
+            className="ml-2 text-white font-bold"
+          >
+            ✖
+          </button>
+        </div>
+      )}
+
       <div className="text-center">
         <h1
           className="text-2xl font-bold"
@@ -114,28 +139,6 @@ const Home = () => {
             roomId={masterRoomId}
             roomMetadata={RoomMetadataOfMasterRoom}
           />
-        </div>
-
-        <div className="flex flex-col gap-4 mt-6">
-          <div className="flex gap-4 justify-center">
-            <Input
-              placeholder="Nhập tên phòng"
-              value={nameGarden}
-              onChange={(e) => setNameGarden(e.target.value)}
-            />
-            <Button onClick={handleCreateRoom} disabled={loading}>
-              {loading ? "Đang tạo phòng..." : "Tạo phòng mới"}
-            </Button>
-          </div>
-
-          <div className="flex gap-4 justify-center">
-            <Input
-              placeholder="Nhập mã phòng"
-              value={idGarden}
-              onChange={(e) => setIdGarden(e.target.value)}
-            />
-            <Button onClick={handleJoinRoom}>Tham gia phòng</Button>
-          </div>
         </div>
       </div>
     </main>
