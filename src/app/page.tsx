@@ -5,6 +5,13 @@ import CollaborativeRoom from "@/components/CollaborativeRoom";
 import { getCurrentUser } from "@/lib/action/user.action";
 import { createDocument, getDocuments } from "@/lib/action/room.action";
 import { useRouter } from "next/navigation";
+import RightSidebar from "@/components/SideBar";
+import { Lobster, Poppins } from "next/font/google";
+import { SpeakerHigh, SpeakerSlash } from "phosphor-react";
+
+const lobster = Lobster({ weight: "400", subsets: ["latin"] });
+const poppins = Poppins({ weight: ["400", "500", "700"], subsets: ["latin"] });
+
 import RoomControls from "@/components/RoomControl";
 import HelloScreen from "@/components/HelloScreen";
 
@@ -39,6 +46,39 @@ const Home = () => {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
+  const [toggled, setToggled] = useState(true);
+    // const [soundOn, setSoundOn] = useState(null);
+    // const [soundOff, setSoundOff] = useState(null);
+
+    useEffect(() => {
+        // setSoundOn(new Audio("/sounds/soundOn.mp3"));
+        // setSoundOff(new Audio("/sounds/soundOff.mp3"));
+    }, []);
+
+    // const toggleSound = () => {
+    //     setToggled(!toggled);
+
+    //     if (toggled && soundOff) {
+    //         soundOff.play();
+    //     } else if (!toggled && soundOn) {
+    //         soundOn.play();
+    //     }
+    // };
+    const router = useRouter();
+
+    const handleClick = () => {
+        setToggled(!toggled);
+        // toggleSound();
+    };
+
+    const handleGetRooms = () => {
+        router.push("/classes");
+    };
+
+    const handleLogin = () => {
+        console.log("Login button clicked");
+    };
+    
   // Hiển thị HelloScreen trong 2.5s trước khi vào trang chính
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -132,19 +172,18 @@ const Home = () => {
         </div>
       )}
 
-      <div className="text-center">
+      <div className="text-center flex flex-col items-center relative box-border z-0 w-full pt-8 mt-8">
         <h1
-          className="text-2xl font-bold"
-          style={{ fontFamily: "Kalam, cursive" }}
-        >
-          HAPPY VIETNAMESE WOMEN&apos;S DAY
-        </h1>
-        <h2
-          className="text-2xl font-bold"
-          style={{ fontFamily: "JejuHallasan, cursive" }}
-        >
-          23CLC02
-        </h2>
+                    className={`${lobster.className} font-normal text-5xl text-white my-5 mx-1 drop-shadow-custom rotate-[-3deg] skew-x-[-4deg]`}
+                >
+                    Happy Women&apos;s Day
+                </h1>
+                <p
+                    className={`${poppins.className} font-medium text-xl drop-shadow-custom2 text-white`}
+                >
+                    Chung tay tạo lời chúc <br></br> cùng những bông hoa nhân
+                    dịp 8/3
+                </p>
 
         <div className="mt-4 flex gap-12 justify-center items-center">
           <CollaborativeRoom
