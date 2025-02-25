@@ -1,9 +1,11 @@
 "use client";
 
 import Cloud from "@/components/Cloud";
+import LoginButton from "@/components/LoginButton";
+import RightSidebar from "@/components/SideBar";
 import { Lobster, Poppins } from "next/font/google";
 import { useRouter } from "next/navigation";
-import { List, SpeakerHigh, SpeakerSlash } from "phosphor-react";
+import { SpeakerHigh, SpeakerSlash } from "phosphor-react";
 import { useEffect, useState } from "react";
 
 const lobster = Lobster({ weight: "400", subsets: ["latin"] });
@@ -40,16 +42,15 @@ const Home = () => {
         router.push("/classes");
     };
 
+    const handleLogin = () => {
+        console.log("Login button clicked");
+    };
+
     return (
         <main className="flex h-screen">
             <div className="fixed top-0 left-0 right-0 z-[700] pt-[var(--padding-top,_env(safe-area-inset-top,_0px))] pl-[var(--padding-side,_env(safe-area-inset-left,_0px))] pr-[var(--padding-side,_env(safe-area-inset-right,_0px))] pointer-events-auto">
                 <header className="flex flex-row items-center justify-between pointer-events-auto border-t-[20px] border-t-transparent px-[5%] h-[60px]">
                     <div className="flex">
-                        <div className="h-12 w-12 mr-3">
-                            <div className="flex items-center justify-center w-full h-full rounded-full bg-[#ff3333] cursor-pointer shadow-custom">
-                                <List size={24} color="white" />
-                            </div>
-                        </div>
                         <div className="h-12 w-12 mr-3">
                             <div
                                 className="flex items-center justify-center w-full h-full rounded-full cursor-pointer"
@@ -71,19 +72,23 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="h-5 w-5 bg-red-600"></div>
+                    <div>
+                        <LoginButton onClick={handleLogin} />
+                        <RightSidebar />
+                    </div>
                 </header>
             </div>
-            <div className="text-center flex flex-col items-center relative box-border z-0 w-full pt-8 mt-20">
+            <div className="text-center flex flex-col items-center relative box-border z-0 w-full pt-8 mt-8">
                 <h1
-                    className={`${lobster.className} font-normal text-5xl text-white my-3 mx-1 drop-shadow-custom transform rotate--3 skew--4`}
+                    className={`${lobster.className} font-normal text-5xl text-white my-5 mx-1 drop-shadow-custom rotate-[-3deg] skew-x-[-4deg]`}
                 >
                     Happy Women&apos;s Day
                 </h1>
                 <p
                     className={`${poppins.className} font-medium text-xl drop-shadow-custom2 text-white`}
                 >
-                    Chung tay tạo lời chúc cùng những bông hoa nhân dịp 8/3
+                    Chung tay tạo lời chúc <br></br> cùng những bông hoa nhân
+                    dịp 8/3
                 </p>
                 <div className="mt-20 flex gap-14 justify-center items-center">
                     <Cloud
