@@ -107,3 +107,25 @@ a {
     transform: rotate(360deg);
   }
 }
+
+@keyframes bloom {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.flower {
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.flower.bloom {
+  opacity: 1;
+  transform: scale(1);
+}

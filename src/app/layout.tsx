@@ -1,35 +1,33 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Provider from "./Provider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Happy Women Day",
-  description: "",
+  description: "Chúc mừng ngày Phụ nữ Việt Nam!",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/avif/header.avif" />
-        <title>Happy Women Day</title>
-      </head>
-      <body>
-        <div
-          className="h-screen bg-center bg-cover bg-fixed"
-          style={{
-            backgroundImage: "url('/png/bg.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <div className="h-full w-full flex items-center justify-center">
-            <Provider>{children}</Provider>
+    <ClerkProvider>
+      <html lang="en">
+        <head>
+          <link rel="icon" href="/avif/header.avif" />
+        </head>
+        <body className="relative h-screen w-screen">
+          <div
+            className="h-screen w-screen bg-cover bg-center flex items-center justify-center"
+            style={{ backgroundImage: "url('/png/bg.png')" }}
+          >
+            <div className="h-full w-full flex items-center justify-center">
+              <Provider>{children}</Provider>
+            </div>
           </div>
-        </div>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

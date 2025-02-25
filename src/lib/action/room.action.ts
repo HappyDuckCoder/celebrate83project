@@ -7,17 +7,20 @@ import { revalidatePath } from "next/cache";
 
 export const createDocument = async ({
   title,
-  createUserName,
+  userId,
+  userEmail,
 }: {
   title: string;
-  createUserName: string;
+  userId: string;
+  userEmail: string;
 }) => {
   const roomId = nanoid();
 
   try {
     const metadata = {
-      title: title,
-      creatorId: createUserName,
+      creatorId: userId,
+      userEmail,
+      title,
     };
 
     const room = await liveblocks.createRoom(roomId, {
@@ -29,7 +32,8 @@ export const createDocument = async ({
 
     return parseStringify(room);
   } catch (error) {
-    console.log(`Error happened while creating a room: ${error}`);
+    console.error(`Error happened while creating a room: ${error}`);
+    throw error;
   }
 };
 
