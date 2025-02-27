@@ -9,18 +9,21 @@ export const createDocument = async ({
   title,
   userId,
   userEmail,
+  linkBackground,
 }: {
   title: string;
   userId: string;
   userEmail: string;
+  linkBackground: string;
 }) => {
   const roomId = nanoid();
 
   try {
     const metadata = {
+      title,
       creatorId: userId,
       userEmail,
-      title,
+      backgroundImage: linkBackground,
     };
 
     const room = await liveblocks.createRoom(roomId, {
