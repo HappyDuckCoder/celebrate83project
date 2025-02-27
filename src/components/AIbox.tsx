@@ -9,7 +9,7 @@ const AIbox = ({
 }) => {
   return (
     <div
-      className="p-4 w-3/4 bg-pink-100 shadow-md rounded-xl cursor-pointer hover:bg-pink-200 transition-all 
+      className="p-4 bg-pink-100 shadow-md rounded-xl cursor-pointer hover:bg-pink-200 transition-all 
       flex items-center justify-center text-center border border-pink-300"
       onClick={() => setDraft(item)}
     >

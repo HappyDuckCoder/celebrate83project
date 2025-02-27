@@ -9,8 +9,8 @@ const PickFlower = ({
   setFlowerPick: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   return (
-    <div className="space-y-3">
-      <h3 className="text-lg font-semibold text-center">Thích hoa nào nè</h3>
+    <div className="flex justify-center items-center space-x-3">
+      <h3 className="text-lg font-semibold">Thích hoa nào nè</h3>
       <div className="flex justify-center gap-4">
         {[1, 2, 3, 4, 5].map((i) => (
           <Avatar

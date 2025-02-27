@@ -1,12 +1,11 @@
 "use client";
 
-import CollaborativeRoom from "@/components/CollaborativeRoom";
-import RightSidebar from "@/components/SideBar";
 import { createDocument, getDocuments } from "@/lib/action/room.action";
 import { getCurrentUser } from "@/lib/action/user.action";
 import { Lobster, Poppins } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+// import RightSidebar from "@/components/SideBar";
 // import { SpeakerHigh, SpeakerSlash } from "phosphor-react";
 
 const lobster = Lobster({ weight: "400", subsets: ["latin"] });
@@ -14,15 +13,8 @@ const poppins = Poppins({ weight: ["400", "500", "700"], subsets: ["latin"] });
 
 import HelloScreen from "@/components/HelloScreen";
 import RoomControls from "@/components/RoomControl";
+import SlidingSidebar from "@/components/SlidingSideBar";
 
-const masterRoomId =
-    process.env.NEXT_PUBLIC_MASTER_ROOM_ID || "mWu2Vaq7Mn9QFKeHV7sqU";
-
-const RoomMetadataOfMasterRoom = {
-    title: "Master Room",
-    userEmail: "prto2802@gmail.com",
-    creatorId: "duckilot",
-};
 
 type Room = {
     type: string;
@@ -172,9 +164,8 @@ const Home = () => {
                     </button>
                 </div>
             )}
-            <RightSidebar />
 
-            <div className="text-center flex flex-col items-center relative box-border z-0 w-full pt-8 mt-8">
+            <div className="text-center flex flex-col items-center relative box-border z-0 w-full space-y-3">
                 <h1
                     className={`${lobster.className} font-normal text-5xl text-black my-5 mx-1 drop-shadow-custom rotate-[-3deg] skew-x-[-4deg]`}
                 >
@@ -183,17 +174,11 @@ const Home = () => {
                 <p
                     className={`${poppins.className} font-medium text-xl drop-shadow-custom2 text-black`}
                 >
-                    Chung tay tạo lời chúc <br></br> cùng những bông hoa nhân
-                    dịp 8/3
+                    Chung tay tạo những bông hoa <br></br>chúc mừng
+                    ngày 8/3
                 </p>
-
-                <div className="mt-4 flex gap-12 justify-center items-center">
-                    <CollaborativeRoom
-                        roomId={masterRoomId}
-                        roomMetadata={RoomMetadataOfMasterRoom}
-                    />
-                </div>
             </div>
+            <SlidingSidebar/>
         </main>
     );
 };
