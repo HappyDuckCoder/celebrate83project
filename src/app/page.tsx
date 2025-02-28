@@ -112,7 +112,9 @@ const Home = () => {
         title: nameGarden,
         userId: user_.id,
         userEmail: user_.email,
-        linkBackground: "/png/bg.png",
+        // default
+        linkBackground:
+          "https://files.edgestore.dev/s138ry1152g81ps2/publicFiles/_public/9db91360-9a96-450f-adc9-f670b414580d.png",
       });
 
       if (room) {

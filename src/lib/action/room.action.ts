@@ -69,3 +69,20 @@ export const deleteDocument = async ({ roomId }: { roomId: string }) => {
     console.log(`Error happened while deleting a room: ${error}`);
   }
 };
+
+export const UpdateBackground = async ({
+  roomId,
+  link,
+}: {
+  roomId: string;
+  link: string;
+}) => {
+  try {
+    await liveblocks.updateRoom(roomId, {
+      metadata: { backgroundImage: link },
+    });
+    console.log("Background updated successfully!");
+  } catch (error) {
+    console.log(`Error updating background: ${error}`);
+  }
+};
