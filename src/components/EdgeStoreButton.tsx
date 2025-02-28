@@ -4,15 +4,7 @@ import { Button } from "./ui/button";
 import { UpdateBackground } from "@/lib/action/room.action";
 import { UploadCloud } from "lucide-react"; // Import icon
 
-export default function EdgeStoreButton({
-  link,
-  setLink,
-  roomid,
-}: {
-  link: string;
-  setLink: React.Dispatch<React.SetStateAction<string>>;
-  roomid: string;
-}) {
+export default function EdgeStoreButton({ roomid }: { roomid: string }) {
   const [file, setFile] = React.useState<File | null>(null);
   const [uploadProgress, setUploadProgress] = React.useState<number | null>(
     null
@@ -32,8 +24,6 @@ export default function EdgeStoreButton({
 
       // Cập nhật background của phòng
       await UpdateBackground({ roomId: roomid, link: res.url });
-
-      setLink(res.url);
     } catch (error) {
       console.error("Upload failed:", error);
     } finally {

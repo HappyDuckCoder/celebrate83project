@@ -16,10 +16,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import CopyRoomLink from "./CopyRoomLink";
 import EdgeStoreButton from "./EdgeStoreButton";
-import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { getCurrentUser } from "@/lib/action/user.action";
-import { useAuth } from "@clerk/nextjs";
-import { set } from "zod";
 
 const masterRoomTitle = "Master Room";
 
@@ -43,24 +40,14 @@ function SomeoneIsTyping() {
   );
 }
 
-function RoomCreator({
-  creator,
-  link,
-  setLink,
-  roomid,
-}: {
-  creator: string;
-  link: string;
-  setLink: React.Dispatch<React.SetStateAction<string>>;
-  roomid: string;
-}) {
+function RoomCreator({ creator, roomid }: { creator: string; roomid: string }) {
   return (
     <div className="p-4">
       <h2 className="text-lg font-semibold text-gray-700">
         👑 Trưởng phòng: <span className="text-blue-600">{creator}</span>
       </h2>
       <div className="mt-4">
-        <EdgeStoreButton link={link} setLink={setLink} roomid={roomid} />
+        <EdgeStoreButton roomid={roomid} />
       </div>
     </div>
   );
@@ -81,7 +68,6 @@ function RoomContent({
   const [flowerPick, setFlowerPick] = useState(1);
   const [loadingAI, setLoadingAI] = useState(false);
   const [selectedWish, setSelectedWish] = useState<string[]>([]);
-  const [link, setLink] = useState("");
   const [curUser, setCurUser] = useState("");
   const updateMyPresence = useUpdateMyPresence();
   const wish = useStorage((root) => root.wish);
@@ -168,12 +154,7 @@ function RoomContent({
             {/* Hiển thị tên chủ phòng + component đổi background (góc trên bên trái) */}
             {creator === curUser && (
               <div className="absolute top-4 left-4">
-                <RoomCreator
-                  creator={creator}
-                  link={link}
-                  setLink={setLink}
-                  roomid={roomId}
-                />
+                <RoomCreator creator={creator} roomid={roomId} />
               </div>
             )}
 
