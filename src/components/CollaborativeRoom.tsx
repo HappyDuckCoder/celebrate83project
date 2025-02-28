@@ -7,7 +7,7 @@ import {
   useStorage,
   useUpdateMyPresence,
 } from "@liveblocks/react/suspense";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AIbox from "./AIbox";
 import FloatingWishes from "./FloatingWish";
 import Loading from "./Loading";
@@ -16,6 +16,10 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import CopyRoomLink from "./CopyRoomLink";
 import EdgeStoreButton from "./EdgeStoreButton";
+import { clerkClient, currentUser } from "@clerk/nextjs/server";
+import { getCurrentUser } from "@/lib/action/user.action";
+import { useAuth } from "@clerk/nextjs";
+import { set } from "zod";
 
 const masterRoomTitle = "Master Room";
 
@@ -78,6 +82,7 @@ function RoomContent({
   const [loadingAI, setLoadingAI] = useState(false);
   const [selectedWish, setSelectedWish] = useState<string[]>([]);
   const [link, setLink] = useState("");
+  const [curUser, setCurUser] = useState("");
   const updateMyPresence = useUpdateMyPresence();
   const wish = useStorage((root) => root.wish);
 
@@ -90,6 +95,19 @@ function RoomContent({
     addWish(draft, flowerPick);
     setDraft("");
   };
+
+  useEffect(() => {
+    const getCurrentUserEmail = async () => {
+      const user = await getCurrentUser();
+      if (user) {
+        setCurUser(user.email);
+      } else {
+        setCurUser("");
+      }
+    };
+
+    getCurrentUserEmail();
+  }, []);
 
   const generateWish = useCallback(async () => {
     setLoadingAI(true);
@@ -135,23 +153,35 @@ function RoomContent({
     <div
       className="flex flex-col h-full justify-center items-center"
       style={{
-        backgroundImage: link ? `url(${link})` : `url(${currentlink})`,
+        backgroundImage: `url(${currentlink})`,
         backgroundSize: "cover",
-        backgroundPosition: "center",
       }}
     >
       <div className="container flex flex-col space-y-4 p-4 max-w-lg mx-auto items-center">
         {title !== masterRoomTitle && (
-          <div className="flex flex-col gap-4 items-center justify-between w-full">
-            <h2 className="text-2xl font-semibold">{title}</h2>
-            <CopyRoomLink />
-            <RoomCreator
-              creator={creator}
-              link={link}
-              setLink={setLink}
-              roomid={roomId}
-            />
-          </div>
+          <>
+            {/* Nút Copy góc trên bên phải */}
+            <div className="absolute top-4 right-4">
+              <CopyRoomLink />
+            </div>
+
+            {/* Hiển thị tên chủ phòng + component đổi background (góc trên bên trái) */}
+            {creator === curUser && (
+              <div className="absolute top-4 left-4">
+                <RoomCreator
+                  creator={creator}
+                  link={link}
+                  setLink={setLink}
+                  roomid={roomId}
+                />
+              </div>
+            )}
+
+            {/* Tiêu đề phòng */}
+            <div className="flex flex-col items-center w-full">
+              <h2 className="text-2xl font-semibold">{title}</h2>
+            </div>
+          </>
         )}
         <WhoIsHere />
         <SomeoneIsTyping />

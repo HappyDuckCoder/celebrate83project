@@ -1,11 +1,8 @@
-"use client";
 import * as React from "react";
 import { useEdgeStore } from "../lib/edgestore";
 import { Button } from "./ui/button";
-import { liveblocks } from "@/lib/liveblocks";
-import { Liveblocks } from "@liveblocks/node";
 import { UpdateBackground } from "@/lib/action/room.action";
-import { revalidatePath } from "next/cache";
+import { UploadCloud } from "lucide-react"; // Import icon
 
 export default function EdgeStoreButton({
   link,
@@ -22,6 +19,7 @@ export default function EdgeStoreButton({
   );
   const [uploading, setUploading] = React.useState(false);
   const { edgestore } = useEdgeStore();
+  const fileInputRef = React.useRef<HTMLInputElement | null>(null);
 
   const handleUpload = async () => {
     if (!file) return;
@@ -32,11 +30,10 @@ export default function EdgeStoreButton({
         onProgressChange: (progress) => setUploadProgress(progress),
       });
 
-      console.log("Upload success:", res);
-      setLink(res.url);
-
-      // Cập nhật ảnh nền sau khi tải lên thành công
+      // Cập nhật background của phòng
       await UpdateBackground({ roomId: roomid, link: res.url });
+
+      setLink(res.url);
     } catch (error) {
       console.error("Upload failed:", error);
     } finally {
@@ -48,11 +45,26 @@ export default function EdgeStoreButton({
 
   return (
     <div className="flex flex-col items-center space-y-3">
+      {/* Input file ẩn */}
       <input
         type="file"
+        ref={fileInputRef}
         onChange={(e) => setFile(e.target.files?.[0] || null)}
-        className="border p-2 rounded-lg"
+        className="hidden"
       />
+
+      {/* Icon chọn file */}
+      <button
+        onClick={() => fileInputRef.current?.click()}
+        className="p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-all"
+      >
+        <UploadCloud className="w-8 h-8 text-blue-500" />
+      </button>
+
+      {/* Hiển thị tên file sau khi chọn */}
+      {file && <p className="text-sm text-gray-600">{file.name}</p>}
+
+      {/* Hiển thị progress khi đang tải lên */}
       {uploadProgress !== null && (
         <div className="w-full bg-gray-200 rounded-full h-2">
           <div
@@ -61,6 +73,8 @@ export default function EdgeStoreButton({
           ></div>
         </div>
       )}
+
+      {/* Nút tải lên */}
       <Button onClick={handleUpload} disabled={!file || uploading}>
         {uploading ? "Đang tải lên..." : "Tải lên"}
       </Button>

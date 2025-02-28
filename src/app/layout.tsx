@@ -18,12 +18,12 @@ export default function RootLayout({
         <head>
           <link rel="icon" href="/avif/header.avif" />
         </head>
-        <body className="relative h-screen w-screen">
+        <body className="relative min-h-screen w-full overflow-auto">
           <div
-            className="h-screen w-screen bg-cover bg-center flex items-center justify-center"
+            className="min-h-screen w-full bg-cover bg-center flex items-center justify-center"
             style={{ backgroundImage: "url('/png/bg.png')" }}
           >
-            <div className="h-full w-full flex items-center justify-center">
+            <div className="w-full flex items-center justify-center px-4 py-6">
               <EdgeStoreProvider>
                 <Provider>{children}</Provider>
               </EdgeStoreProvider>
