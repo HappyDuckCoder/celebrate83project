@@ -85,6 +85,7 @@ declare type RoomMetadata = {
   title: string;
   userEmail: string;
   creatorId: string;
+  backgroundImage: string;
 };
 
 declare type Room = {
