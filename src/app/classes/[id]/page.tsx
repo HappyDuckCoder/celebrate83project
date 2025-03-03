@@ -25,7 +25,8 @@ const Classes = () => {
       const completeMetadata: RoomMetadata = {
         title: roomData.metadata.title,
         userEmail: roomData.metadata.userEmail,
-        creatorId: roomData.metadata.creatorId || "unknown",
+        creatorId: roomData.metadata.creatorId,
+        backgroundImage: roomData.metadata.backgroundImage || "unknown",
       };
 
       setRoom({ ...roomData, metadata: completeMetadata });

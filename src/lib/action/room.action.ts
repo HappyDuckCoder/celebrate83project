@@ -9,18 +9,21 @@ export const createDocument = async ({
   title,
   userId,
   userEmail,
+  linkBackground,
 }: {
   title: string;
   userId: string;
   userEmail: string;
+  linkBackground: string;
 }) => {
   const roomId = nanoid();
 
   try {
     const metadata = {
+      title,
       creatorId: userId,
       userEmail,
-      title,
+      backgroundImage: linkBackground,
     };
 
     const room = await liveblocks.createRoom(roomId, {
@@ -64,5 +67,22 @@ export const deleteDocument = async ({ roomId }: { roomId: string }) => {
     await liveblocks.deleteRoom(roomId);
   } catch (error) {
     console.log(`Error happened while deleting a room: ${error}`);
+  }
+};
+
+export const UpdateBackground = async ({
+  roomId,
+  link,
+}: {
+  roomId: string;
+  link: string;
+}) => {
+  try {
+    await liveblocks.updateRoom(roomId, {
+      metadata: { backgroundImage: link },
+    });
+    console.log("Background updated successfully!");
+  } catch (error) {
+    console.log(`Error updating background: ${error}`);
   }
 };

@@ -20,6 +20,8 @@ export async function POST() {
           Bạn là một người đàn ông tinh tế, hãy cho tôi 4 câu chúc gồm 1 câu gửi tới các bạn nữ xinh đẹp trong lớp ngày Phụ nữ Việt Nam.
 
           Hãy bắt đầu bằng những câu nói nổi tiếng trên thế giới về IT nữa nhé
+
+          Sử dụng thêm icon
         `,
     });
     return NextResponse.json(object);

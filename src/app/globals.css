@@ -129,3 +129,23 @@ a {
   opacity: 1;
   transform: scale(1);
 }
+
+/* Thiết kế thanh cuộn 8/3 */
+body::-webkit-scrollbar {
+  width: 10px; /* Độ rộng thanh cuộn */
+}
+
+body::-webkit-scrollbar-track {
+  background: #ffe6eb; /* Nền thanh cuộn */
+  border-radius: 10px; /* Bo góc */
+}
+
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff9aae, #ff6b81); /* Gradient hồng */
+  border-radius: 10px; /* Bo tròn đầu */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff6b81, #ff3d66); /* Đậm hơn khi hover */
+}
