@@ -15,7 +15,6 @@ import HelloScreen from "@/components/HelloScreen";
 import RoomControls from "@/components/RoomControl";
 import SlidingSidebar from "@/components/SlidingSideBar";
 
-
 type Room = {
     type: string;
     id: string;
@@ -174,11 +173,10 @@ const Home = () => {
                 <p
                     className={`${poppins.className} font-medium text-xl drop-shadow-custom2 text-black`}
                 >
-                    Chung tay tạo những bông hoa <br></br>chúc mừng
-                    ngày 8/3
+                    Chung tay tạo những bông hoa <br></br>chúc mừng ngày 8/3
                 </p>
             </div>
-            <SlidingSidebar/>
+            <SlidingSidebar />
         </main>
     );
 };
