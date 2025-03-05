@@ -54,6 +54,9 @@ export default function SlidingSidebar() {
             <div className="flex-grow overflow-auto text-gray-700">
               <h2 className="text-xl font-semibold text-gray-800 text-center">
                 Nhập lời chúc của bạn ở đây nè
+                <span className="ml-2 text-lg font-semibold text-pink-600 text-center">
+                  🌸 Chúc mừng 8/3 nhé 🌸
+                </span>
               </h2>
               <div className="flex">
                 <CollaborativeRoom

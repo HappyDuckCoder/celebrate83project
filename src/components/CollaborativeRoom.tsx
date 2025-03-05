@@ -42,11 +42,20 @@ function SomeoneIsTyping() {
 
 function RoomCreator({ creator, roomid }: { creator: string; roomid: string }) {
   return (
-    <div className="p-4">
-      <h2 className="text-lg font-semibold text-gray-700">
-        👑 Trưởng phòng: <span className="text-blue-600">{creator}</span>
+    <div className="p-6 ">
+      {/* Hiệu ứng bokeh 8/3 */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute w-16 h-16 bg-pink-300 opacity-30 rounded-full top-4 left-8 animate-pulse"></div>
+        <div className="absolute w-20 h-20 bg-pink-200 opacity-40 rounded-full bottom-6 right-10 animate-bounce"></div>
+        <div className="absolute w-12 h-12 bg-pink-400 opacity-50 rounded-full top-10 right-16 animate-ping"></div>
+      </div>
+
+      <h2 className="text-xl font-semibold text-pink-700 text-center">
+        👑 Trưởng phòng: <span className="text-pink-600">{creator}</span>
       </h2>
-      <div className="mt-4">
+
+      {/* Nút upload với hiệu ứng đẹp */}
+      <div className="mt-6">
         <EdgeStoreButton roomid={roomid} />
       </div>
     </div>
@@ -166,7 +175,7 @@ function RoomContent({
         )}
         <WhoIsHere />
         <SomeoneIsTyping />
-        <div className="flex space-x-2 items-center w-[80%]">
+        <div className="flex space-x-2 items-center w-full">
           <Input
             type="text"
             placeholder="🌸 Lời hay ý đẹp..."
@@ -184,15 +193,19 @@ function RoomContent({
               }
             }}
             onBlur={() => updateMyPresence({ isTyping: false })}
-            className="border border-gray-300 p-2 rounded-md break-words"
+            className="border border-gray-300 p-2 rounded-md break-words w-full"
             style={{ wordBreak: "break-word" }}
           />
           <Button onClick={addWishByButton} disabled={loadingAI}>
             💖 Gửi
           </Button>
         </div>
-        <div>
-          <Button onClick={generateWish} disabled={loadingAI}>
+        <div className="w-full">
+          <Button
+            className="bg-pink-500 hover:bg-pink-600 w-full"
+            onClick={generateWish}
+            disabled={loadingAI}
+          >
             {loadingAI ? "🤖 Đang tạo..." : "✨ Nhờ AI giúp"}
           </Button>
         </div>
@@ -208,7 +221,7 @@ function RoomContent({
             🌟 Bạn muốn chọn lời chúc nào nè
           </h3>
 
-          <div className="grid grid-cols-2 grid-rows-2 gap-5">
+          <div className="grid lg:grid-cols-2 lg:grid-rows-2 md:grid-cols-2 md:grid-rows-2 gap-5 ">
             {selectedWish.map((item, index) => (
               <AIbox key={index} item={item} setDraft={setDraft} />
             ))}
@@ -232,14 +245,16 @@ const CollaborativeRoom = ({
       initialPresence={{ isTyping: false }}
       initialStorage={{ wish: new LiveList([]) }}
     >
-      <ClientSideSuspense fallback={<Loading />}>
-        <RoomContent
-          roomId={roomId}
-          title={roomMetadata.title}
-          creator={roomMetadata.userEmail}
-          currentlink={roomMetadata.backgroundImage}
-        />
-      </ClientSideSuspense>
+      <div className="flex flex-col h-full w-full justify-center items-center">
+        <ClientSideSuspense fallback={<Loading />}>
+          <RoomContent
+            roomId={roomId}
+            title={roomMetadata.title}
+            creator={roomMetadata.userEmail}
+            currentlink={roomMetadata.backgroundImage}
+          />
+        </ClientSideSuspense>
+      </div>
     </RoomProvider>
   );
 };

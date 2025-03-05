@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import CollaborativeRoom from "@/components/CollaborativeRoom";
 import { getDocument } from "@/lib/action/room.action";
+import HelloScreen from "@/components/HelloScreen";
 
 const Classes = () => {
   const { id } = useParams() as { id: string };
@@ -35,10 +36,10 @@ const Classes = () => {
     fetchRoom();
   }, [id, router]);
 
-  if (!room) return <div>Đang tải phòng...</div>;
+  if (!room) return <HelloScreen />;
 
   return (
-    <main className="flex h-screen w-[75%] flex-col pt-24">
+    <main className="flex flex-col justify-center items-center w-max h-max">
       <CollaborativeRoom roomId={room.id} roomMetadata={room.metadata} />
     </main>
   );
