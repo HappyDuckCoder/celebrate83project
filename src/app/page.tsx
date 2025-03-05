@@ -90,6 +90,9 @@ const Home = () => {
       const user_ = await getCurrentUser();
       if (!user_) {
         setError("Bạn chưa đăng nhập!");
+
+        router.push("/sign-in");
+
         setLoading(false);
         return;
       }

@@ -3,6 +3,7 @@ import "./globals.css";
 import Provider from "./Provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { EdgeStoreProvider } from "@/lib/edgestore";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Happy Women Day",
@@ -25,7 +26,10 @@ export default function RootLayout({
           >
             <div className="w-full flex items-center justify-center px-4 py-6">
               <EdgeStoreProvider>
-                <Provider>{children}</Provider>
+                <Provider>
+                  <Toaster />
+                  {children}
+                </Provider>
               </EdgeStoreProvider>
             </div>
           </div>

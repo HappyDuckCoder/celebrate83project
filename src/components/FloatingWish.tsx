@@ -121,7 +121,7 @@ const FloatingWishes = ({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="absolute w-64 z-0 font-serif left-full ml-2 px-3 py-1 bg-white shadow-lg rounded-md text-gray-700 text-sm"
+                  className="absolute w-80 z-0 font-serif left-full ml-2 px-3 py-1 bg-white shadow-lg rounded-md text-gray-700 text-sm"
                 >
                   {wish.text}
                 </motion.div>
