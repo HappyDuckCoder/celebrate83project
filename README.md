@@ -120,4 +120,3 @@ Use ShadCN components for a consistent and modern design system
 - Tailwind CSS setup: [Tailwind CSS](https://tailwindcss.com/docs/installation)
 - TypeScript setup: [TypeScript](https://www.typescriptlang.org/docs/)
 
-# hihihaha
