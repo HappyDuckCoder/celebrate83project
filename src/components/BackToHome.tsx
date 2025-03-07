@@ -1,6 +1,5 @@
 "use client";
 
-import { BackwardIcon } from "@heroicons/react/24/solid";
 import { ArrowLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
