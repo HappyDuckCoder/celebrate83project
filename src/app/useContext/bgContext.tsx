@@ -13,7 +13,7 @@ const BackgroundContext = createContext<BackgroundContextType | undefined>(
     undefined
 );
 
-export const BackgroundProvider =  ({
+export const BackgroundProvider = ({
     children,
 }: {
     children: React.ReactNode;
@@ -26,7 +26,7 @@ export const BackgroundProvider =  ({
         if (!roomId) return;
 
         const fetchBackground = async () => {
-            if(roomId) {
+            if (roomId) {
                 const bgUrl = await getRoomBackground(roomId);
                 if (bgUrl) setBackgroundImage(bgUrl);
             }
@@ -38,7 +38,9 @@ export const BackgroundProvider =  ({
         <BackgroundContext.Provider
             value={{ backgroundImage, setBackgroundImage }}
         >
-            {children}
+            <div className="flex items-center justify-center w-screen h-full">
+                {children}
+            </div>
         </BackgroundContext.Provider>
     );
 };

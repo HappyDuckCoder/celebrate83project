@@ -26,17 +26,17 @@ export default function EdgeStoreButton({ roomid }: { roomid: string }) {
                 onProgressChange: (progress) => setUploadProgress(progress),
             });
 
-            await UpdateBackground({ roomId: roomid, link: res.url });
-            
-            setFile(null);
-            setBackgroundImage(res.url);
-        } catch (error) {
-            console.error("Upload failed:", error);
-        } finally {
-            setUploading(false);
-            setUploadProgress(null);
-        }
-    };
+      await UpdateBackground({ roomId: roomid, link: res.url });
+
+      setFile(null);
+      setBackgroundImage(res.url);
+    } catch (error) {
+      console.error("Upload failed:", error);
+    } finally {
+      setUploading(false);
+      setUploadProgress(null);
+    }
+  };
 
     return (
         <div className="flex flex-wrap items-center gap-3 relative">
