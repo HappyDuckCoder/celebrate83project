@@ -17,6 +17,7 @@ import Loading from "./Loading";
 import PickFlower from "./PickFlower";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import BackToHome from "./BackToHome";
 
 const masterRoomTitle = "Master Room";
 
@@ -167,7 +168,10 @@ function RoomContent({
           <>
             {/* Nút Copy góc trên bên phải */}
             <div className="absolute top-4 right-4">
-              <CopyRoomLink />
+              <div className="flex space-x-2">
+                <CopyRoomLink />
+                <BackToHome />
+              </div>
             </div>
 
             {/* Hiển thị tên chủ phòng + component đổi background (góc trên bên trái) */}
