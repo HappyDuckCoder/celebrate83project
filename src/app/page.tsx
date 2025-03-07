@@ -2,7 +2,7 @@
 
 import { createDocument, getDocuments } from "@/lib/action/room.action";
 import { getCurrentUser } from "@/lib/action/user.action";
-import { Lobster, Poppins } from "next/font/google";
+import { Lobster } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
