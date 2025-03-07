@@ -162,6 +162,7 @@ const Home = () => {
       <SlidingSidebar
         roomId={masterRoomId}
         RoomMetadata={RoomMetadataOfMasterRoom}
+        isCreator={false}
       />
     </main>
   );

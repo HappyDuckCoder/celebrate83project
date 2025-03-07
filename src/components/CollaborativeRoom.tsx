@@ -36,21 +36,16 @@ function SomeoneIsTyping() {
 }
 
 function RoomContent({
-  roomId,
-  title,
-  creator,
   SetOpenBar,
+  isCreator,
 }: {
-  roomId: string;
-  title: string;
-  creator: string;
   SetOpenBar?: React.Dispatch<React.SetStateAction<boolean>>;
+  isCreator: boolean;
 }) {
   const [draft, setDraft] = useState("");
   const [flowerPick, setFlowerPick] = useState(1);
   const [loadingAI, setLoadingAI] = useState(false);
   const [selectedWish, setSelectedWish] = useState<string[]>([]);
-  const [curUser, setCurUser] = useState("");
   const updateMyPresence = useUpdateMyPresence();
   const wish = useStorage((root) => root.wish);
 
@@ -160,7 +155,7 @@ function RoomContent({
             imgIndex: w.imgIndex,
           }))}
           onDelete={deleteWish}
-          isCreator={creator === curUser}
+          isCreator={isCreator}
         />
       </div>
       {/* Hiển thị danh sách lời chúc từ AI */}
@@ -183,12 +178,12 @@ function RoomContent({
 
 const CollaborativeRoom = ({
   roomId,
-  roomMetadata,
   SetOpenBar,
+  isCreator,
 }: {
   roomId: string;
-  roomMetadata: RoomMetadata;
   SetOpenBar?: React.Dispatch<React.SetStateAction<boolean>>;
+  isCreator: boolean;
 }) => {
   return (
     <RoomProvider
@@ -198,12 +193,7 @@ const CollaborativeRoom = ({
     >
       <div className="flex flex-col h-full w-full justify-center items-center">
         <ClientSideSuspense fallback={<Loading />}>
-          <RoomContent
-            roomId={roomId}
-            title={roomMetadata.title}
-            creator={roomMetadata.userEmail}
-            SetOpenBar={SetOpenBar}
-          />
+          <RoomContent SetOpenBar={SetOpenBar} isCreator={isCreator} />
         </ClientSideSuspense>
       </div>
     </RoomProvider>

@@ -112,7 +112,11 @@ const Classes = () => {
         </>
       )}
 
-      <SlidingSidebar roomId={room.id} RoomMetadata={room.metadata} />
+      <SlidingSidebar
+        roomId={room.id}
+        RoomMetadata={room.metadata}
+        isCreator={room.metadata.userEmail === curUser}
+      />
     </main>
   );
 };

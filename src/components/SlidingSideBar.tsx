@@ -7,10 +7,11 @@ import CollaborativeRoom from "./CollaborativeRoom";
 
 export default function SlidingSidebar({
   roomId,
-  RoomMetadata,
+  isCreator,
 }: {
   roomId: string;
   RoomMetadata: RoomMetadata;
+  isCreator: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -56,8 +57,8 @@ export default function SlidingSidebar({
             <div className="flex">
               <CollaborativeRoom
                 roomId={roomId}
-                roomMetadata={RoomMetadata}
                 SetOpenBar={setIsOpen}
+                isCreator={isCreator}
               />
             </div>
             {/* </div> */}
