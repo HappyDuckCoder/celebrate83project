@@ -119,3 +119,5 @@ Use ShadCN components for a consistent and modern design system
 - Installing Groq: [Groq](https://groq.com/docs)
 - Tailwind CSS setup: [Tailwind CSS](https://tailwindcss.com/docs/installation)
 - TypeScript setup: [TypeScript](https://www.typescriptlang.org/docs/)
+
+# hihihaha
