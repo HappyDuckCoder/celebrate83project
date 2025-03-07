@@ -135,7 +135,7 @@ const Home = () => {
 
       <div className="text-center flex flex-col items-center relative box-border z-0 w-full space-y-3">
         <h1
-          className={`${lobster.className} font-normal text-5xl text-black my-5 mx-1 drop-shadow-custom rotate-[-3deg] skew-x-[-4deg]`}
+          className={`${lobster.className} font-normal text-5xl text-black my-3 mx-1 drop-shadow-custom rotate-[-3deg] skew-x-[-4deg]`}
         >
           Happy Women&apos;s Day
         </h1>
