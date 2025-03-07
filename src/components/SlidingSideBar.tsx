@@ -5,17 +5,15 @@ import { Plus, X } from "lucide-react";
 import { useState } from "react";
 import CollaborativeRoom from "./CollaborativeRoom";
 
-export default function SlidingSidebar() {
+export default function SlidingSidebar({
+    roomId,
+    isCreator,
+}: {
+    roomId: string;
+    RoomMetadata: RoomMetadata;
+    isCreator: boolean;
+}) {
     const [isOpen, setIsOpen] = useState(false);
-    const masterRoomId =
-        process.env.NEXT_PUBLIC_MASTER_ROOM_ID || "mWu2Vaq7Mn9QFKeHV7sqU";
-
-    const RoomMetadataOfMasterRoom = {
-        title: "Master Room",
-        userEmail: "prto2802@gmail.com",
-        creatorId: "duckilot",
-        backgroundImage: "",
-    };
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
@@ -58,11 +56,12 @@ export default function SlidingSidebar() {
                         </span>
                         <div className="flex">
                             <CollaborativeRoom
-                                roomId={masterRoomId}
-                                roomMetadata={RoomMetadataOfMasterRoom}
+                                roomId={roomId}
                                 SetOpenBar={setIsOpen}
+                                isCreator={isCreator}
                             />
                         </div>
+                        {/* </div> */}
                     </div>
                 </div>
             </motion.div>
