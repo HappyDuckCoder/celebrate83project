@@ -1,4 +1,3 @@
-import { getCurrentUser } from "@/lib/action/user.action";
 import { LiveList, LiveObject } from "@liveblocks/client";
 import { ClientSideSuspense } from "@liveblocks/react";
 import {
@@ -8,18 +7,13 @@ import {
   useStorage,
   useUpdateMyPresence,
 } from "@liveblocks/react/suspense";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import AIbox from "./AIbox";
-import CopyRoomLink from "./CopyRoomLink";
-import EdgeStoreButton from "./EdgeStoreButton";
 import FloatingWishes from "./FloatingWish";
 import Loading from "./Loading";
 import PickFlower from "./PickFlower";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import BackToHome from "./BackToHome";
-
-const masterRoomTitle = "Master Room";
 
 function WhoIsHere() {
   const userCount = useOthers((others) => others.length);
@@ -41,39 +35,15 @@ function SomeoneIsTyping() {
   );
 }
 
-function RoomCreator({ creator, roomid }: { creator: string; roomid: string }) {
-  return (
-    <div className="p-6 ">
-      {/* Hiệu ứng bokeh 8/3 */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute w-16 h-16 bg-pink-300 opacity-30 rounded-full top-4 left-8 animate-pulse"></div>
-        <div className="absolute w-20 h-20 bg-pink-200 opacity-40 rounded-full bottom-6 right-10 animate-bounce"></div>
-        <div className="absolute w-12 h-12 bg-pink-400 opacity-50 rounded-full top-10 right-16 animate-ping"></div>
-      </div>
-
-      <h2 className="text-xl font-semibold text-pink-700 text-center">
-        👑 Trưởng phòng: <span className="text-pink-600">{creator}</span>
-      </h2>
-
-      {/* Nút upload với hiệu ứng đẹp */}
-      <div className="mt-6">
-        <EdgeStoreButton roomid={roomid} />
-      </div>
-    </div>
-  );
-}
-
 function RoomContent({
   roomId,
   title,
   creator,
-  //   currentlink,
   SetOpenBar,
 }: {
   roomId: string;
   title: string;
   creator: string;
-  currentlink: string;
   SetOpenBar?: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [draft, setDraft] = useState("");
@@ -101,19 +71,6 @@ function RoomContent({
     addWish(draft, flowerPick);
     setDraft("");
   };
-
-  useEffect(() => {
-    const getCurrentUserEmail = async () => {
-      const user = await getCurrentUser();
-      if (user) {
-        setCurUser(user.email);
-      } else {
-        setCurUser("");
-      }
-    };
-
-    getCurrentUserEmail();
-  }, []);
 
   const generateWish = useCallback(async () => {
     setLoadingAI(true);
@@ -164,29 +121,6 @@ function RoomContent({
       }}
     >
       <div className="container flex flex-col space-y-4 p-4 max-w-lg mx-auto items-center">
-        {title !== masterRoomTitle && (
-          <>
-            {/* Nút Copy góc trên bên phải */}
-            <div className="absolute top-4 right-4">
-              <div className="flex space-x-2">
-                <CopyRoomLink />
-                <BackToHome />
-              </div>
-            </div>
-
-            {/* Hiển thị tên chủ phòng + component đổi background (góc trên bên trái) */}
-            {creator === curUser && (
-              <div className="absolute top-4 left-4">
-                <RoomCreator creator={creator} roomid={roomId} />
-              </div>
-            )}
-
-            {/* Tiêu đề phòng */}
-            <div className="flex flex-col items-center w-full">
-              <h2 className="text-2xl font-semibold">{title}</h2>
-            </div>
-          </>
-        )}
         <WhoIsHere />
         <SomeoneIsTyping />
         <div className="flex space-x-2 items-center w-[80%]">
@@ -268,7 +202,6 @@ const CollaborativeRoom = ({
             roomId={roomId}
             title={roomMetadata.title}
             creator={roomMetadata.userEmail}
-            currentlink={roomMetadata.backgroundImage}
             SetOpenBar={SetOpenBar}
           />
         </ClientSideSuspense>

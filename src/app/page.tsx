@@ -37,6 +37,16 @@ const Home = () => {
   const { setBackgroundImage } = useBackground();
   const router = useRouter();
 
+  const masterRoomId =
+    process.env.NEXT_PUBLIC_MASTER_ROOM_ID || "mWu2Vaq7Mn9QFKeHV7sqU";
+
+  const RoomMetadataOfMasterRoom = {
+    title: "Master Room",
+    userEmail: "prto2802@gmail.com",
+    creatorId: "duckilot",
+    backgroundImage: "",
+  };
+
   // Hiển thị HelloScreen trong 2.5s trước khi vào trang chính
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -149,7 +159,10 @@ const Home = () => {
         </p>
       </div>
 
-      <SlidingSidebar />
+      <SlidingSidebar
+        roomId={masterRoomId}
+        RoomMetadata={RoomMetadataOfMasterRoom}
+      />
     </main>
   );
 };

@@ -28,7 +28,6 @@ export async function POST() {
           4️⃣ Mỗi câu chúc kèm theo một biểu tượng cảm xúc (emoji) phù hợp.  
 
           ⚠️ **Lưu ý**: Hãy giữ lời chúc ngắn gọn, truyền cảm hứng và thể hiện sự trân trọng.  
-
         `,
     });
     return NextResponse.json(object);
