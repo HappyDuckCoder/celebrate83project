@@ -1,12 +1,15 @@
-import { currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
+"use client";
+
 import React from "react";
 
-const Test = async () => {
-  const clerkUser = await currentUser();
-  if (!clerkUser) redirect("/sign-in");
-
-  return <div>Test</div>;
+const Test = () => {
+  return (
+    <main className="relative min-h-screen p-4">
+      {/* Đặt Circle ở góc trên bên trái */}
+      <div className="absolute top-4 left-4"></div>
+      <h1 className="text-center mt-10">Test</h1>
+    </main>
+  );
 };
 
 export default Test;

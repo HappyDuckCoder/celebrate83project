@@ -5,6 +5,7 @@ import { BackgroundProvider } from "../app/useContext/bgContext";
 import "./globals.css";
 import Provider from "./Provider";
 import BackgroundWrapper from "@/components/BackgroundWrapper";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
     title: "Happy Women Day",
@@ -14,24 +15,25 @@ export const metadata: Metadata = {
 export default function RootLayout({
     children,
 }: Readonly<{ children: React.ReactNode }>) {
-    return (
-        <ClerkProvider>
-            <html lang="en">
-                <head>
-                    <link rel="icon" href="/avif/header.avif" />
-                </head>
-                <body className="relative min-h-screen w-full overflow-hidden">
-                    <BackgroundProvider>
-                        <EdgeStoreProvider>
-                            <Provider>
-                                <BackgroundWrapper>
-                                    {children}
+  return (
+    <ClerkProvider>
+      <html lang="en">
+        <head>
+          <link rel="icon" href="/avif/header.avif" />
+        </head>
+        <body className="relative min-h-screen w-full overflow-hidden">
+        <BackgroundProvider>
+              <EdgeStoreProvider>
+                <Provider>
+                  <BackgroundWrapper>
+                    <Toaster />
+                            {children}
                                 </BackgroundWrapper>
-                            </Provider>
-                        </EdgeStoreProvider>
-                    </BackgroundProvider>
-                </body>
-            </html>
-        </ClerkProvider>
-    );
+                  </Provider>
+              </EdgeStoreProvider>
+              </BackgroundProvider>
+        </body>
+      </html>
+    </ClerkProvider>
+  );
 }

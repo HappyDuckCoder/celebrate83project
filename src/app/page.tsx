@@ -86,13 +86,16 @@ const Home = () => {
         }
         setLoading(true);
 
-        try {
-            const user_ = await getCurrentUser();
-            if (!user_) {
-                setError("Bạn chưa đăng nhập!");
-                setLoading(false);
-                return;
-            }
+    try {
+      const user_ = await getCurrentUser();
+      if (!user_) {
+        setError("Bạn chưa đăng nhập!");
+
+        router.push("/sign-in");
+
+        setLoading(false);
+        return;
+      }
 
             const roomsData: RoomData = await getDocuments();
 
