@@ -45,14 +45,14 @@ const RoomAction = ({
       {active && (
         <div className="absolute left-14 flex gap-3 items-center">
           <Input
-            className="p-3 w-48 rounded-lg border border-gray-300 focus:ring-2 focus:outline-none transition-all"
+            className="p-3 w-48 rounded-lg border border-gray-300 focus:ring-2 focus:outline-none transition-all z-50"
             placeholder={placeholder}
             value={value}
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={handleKeyDown} // Bắt sự kiện Enter
           />
           <Button
-            className={`w-28 h-12 ${color} text-white rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-all`}
+            className={`w-28 h-12 ${color} text-white rounded-xl flex items-center justify-center gap-2 hover:opacity-90 z-50 transition-all`}
             onClick={handleAction}
             disabled={loading}
           >

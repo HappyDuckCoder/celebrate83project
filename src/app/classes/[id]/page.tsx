@@ -23,7 +23,7 @@ function RoomCreator({ creator, roomid }: { creator: string; roomid: string }) {
         <div className="absolute w-12 h-12 bg-pink-400 opacity-50 rounded-full top-10 right-16 animate-ping"></div>
       </div>
 
-      <h2 className="text-xl font-semibold text-pink-700 text-center">
+      <h2 className="text-xl hidden md:visible font-semibold text-pink-700 text-center">
         👑 Trưởng phòng: <span className="text-pink-600">{creator}</span>
       </h2>
 

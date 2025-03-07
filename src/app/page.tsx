@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const lobster = Lobster({ weight: "400", subsets: ["latin"] });
-const poppins = Poppins({ weight: ["400", "500", "700"], subsets: ["latin"] });
+// const poppins = Poppins({ weight: ["400", "500", "700"], subsets: ["latin"] });
 
 import HelloScreen from "@/components/HelloScreen";
 import RoomControls from "@/components/RoomControl";
@@ -143,15 +143,13 @@ const Home = () => {
         </div>
       )}
 
-      <div className="text-center flex flex-col items-center relative box-border z-0 w-full space-y-3 mb-7">
+      <div className="text-center flex z-0 flex-col items-center relative box-border w-full space-y-3 mb-7">
         <h1
-          className={`${lobster.className} font-normal text-5xl text-black my-3 mx-1 drop-shadow-custom rotate-[-3deg] skew-x-[-4deg]`}
+          className={`${lobster.className} md:text-5xl text-4xl font-normal text-black my-3 mx-1 drop-shadow-custom rotate-[-3deg] skew-x-[-4deg]`}
         >
           Happy Women&apos;s Day
         </h1>
-        <p
-          className={`${poppins.className} font-medium text-xl drop-shadow-custom2 text-black`}
-        >
+        <p className="font-bold text-xl drop-shadow-custom2 text-slate-800">
           Chung tay tạo những bông hoa <br></br>chúc mừng ngày 8/3
         </p>
       </div>
