@@ -102,7 +102,7 @@ const FloatingWishes = ({
                             onMouseLeave={() => setHoverIndex(null)}
                         >
                             {/* Ảnh hoa */}
-                            <Avatar className="hover:animate-[custom-spin_1s_linear_infinite]">
+                            <Avatar className="animate-[custom-spin_5s_linear_infinite]">
                                 <AvatarImage
                                     src={`/png/flower${wish.imgIndex}.png`}
                                     alt={`Flower ${wish.imgIndex}`}

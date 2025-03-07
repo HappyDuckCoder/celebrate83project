@@ -18,7 +18,7 @@ export default function RootLayout({
         <head>
           <link rel="icon" href="/avif/header.avif" />
         </head>
-        <body className="relative min-h-screen w-full overflow-auto">
+        <body className="relative min-h-screen w-full overflow-hidden">
           <div
             className="min-h-screen w-full bg-cover bg-center flex items-center justify-center"
             style={{ backgroundImage: "url('/png/bg.png')" }}
