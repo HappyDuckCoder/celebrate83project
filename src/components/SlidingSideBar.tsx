@@ -63,7 +63,6 @@ export default function SlidingSidebar() {
                                 SetOpenBar={setIsOpen}
                             />
                         </div>
-                        {/* </div> */}
                     </div>
                 </div>
             </motion.div>
