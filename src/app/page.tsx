@@ -90,7 +90,7 @@ const Home = () => {
     if (user) {
       fetchRoomId();
     }
-  }, [user]);
+  }, [user, fetchRoomId]);
 
   // ✅ Hiển thị HelloScreen trong 2.5s trước khi vào trang chính
   useEffect(() => {
