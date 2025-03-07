@@ -8,12 +8,12 @@ import BackgroundWrapper from "@/components/BackgroundWrapper";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
-    title: "Happy Women Day",
-    description: "Chúc mừng ngày Phụ nữ Việt Nam!",
+  title: "Happy Women Day",
+  description: "Chúc mừng ngày Phụ nữ Việt Nam!",
 };
 
 export default function RootLayout({
-    children,
+  children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <ClerkProvider>
@@ -22,16 +22,16 @@ export default function RootLayout({
           <link rel="icon" href="/avif/header.avif" />
         </head>
         <body className="relative min-h-screen w-full overflow-hidden">
-        <BackgroundProvider>
-              <EdgeStoreProvider>
-                <Provider>
-                  <BackgroundWrapper>
-                    <Toaster />
-                            {children}
-                                </BackgroundWrapper>
-                  </Provider>
-              </EdgeStoreProvider>
-              </BackgroundProvider>
+          <BackgroundProvider>
+            <EdgeStoreProvider>
+              <Provider>
+                <BackgroundWrapper>
+                  <Toaster />
+                  {children}
+                </BackgroundWrapper>
+              </Provider>
+            </EdgeStoreProvider>
+          </BackgroundProvider>
         </body>
       </html>
     </ClerkProvider>

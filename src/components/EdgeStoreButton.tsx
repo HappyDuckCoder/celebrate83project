@@ -27,6 +27,7 @@ export default function EdgeStoreButton({ roomid }: { roomid: string }) {
       });
 
       await UpdateBackground({ roomId: roomid, link: res.url });
+
       setFile(null);
       setBackgroundImage(res.url);
     } catch (error) {
