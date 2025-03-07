@@ -45,7 +45,7 @@ const Home = () => {
     }, 2500);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [setBackgroundImage]);
 
   const handleCreateRoom = async () => {
     if (!nameGarden.trim()) {

@@ -26,6 +26,7 @@ const ClassesPage = () => {
   // Lấy danh sách phòng
   const fetchRooms = async () => {
     setLoading(true);
+    setIsPermissionGranted(false);
     setError(null);
     try {
       const response = await getDocuments();
