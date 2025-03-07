@@ -12,6 +12,7 @@ const poppins = Poppins({ weight: ["400", "500", "700"], subsets: ["latin"] });
 import HelloScreen from "@/components/HelloScreen";
 import RoomControls from "@/components/RoomControl";
 import SlidingSidebar from "@/components/SlidingSideBar";
+import { useBackground } from "./useContext/bgContext";
 
 type Room = {
   type: string;
@@ -33,16 +34,18 @@ const Home = () => {
   const [idGarden, setIdGarden] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const { setBackgroundImage } = useBackground();
   const router = useRouter();
 
   // Hiển thị HelloScreen trong 2.5s trước khi vào trang chính
   useEffect(() => {
     const timer = setTimeout(() => {
+      setBackgroundImage("/png/bg.png");
       setIsLoading(false);
     }, 2500);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [setBackgroundImage]);
 
   const handleCreateRoom = async () => {
     if (!nameGarden.trim()) {
@@ -133,7 +136,7 @@ const Home = () => {
         </div>
       )}
 
-      <div className="text-center flex flex-col items-center relative box-border z-0 w-full space-y-3">
+      <div className="text-center flex flex-col items-center relative box-border z-0 w-full space-y-3 mb-7">
         <h1
           className={`${lobster.className} font-normal text-5xl text-black my-3 mx-1 drop-shadow-custom rotate-[-3deg] skew-x-[-4deg]`}
         >
@@ -145,6 +148,7 @@ const Home = () => {
           Chung tay tạo những bông hoa <br></br>chúc mừng ngày 8/3
         </p>
       </div>
+
       <SlidingSidebar />
     </main>
   );

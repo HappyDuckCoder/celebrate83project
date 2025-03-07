@@ -67,7 +67,7 @@ function RoomContent({
   roomId,
   title,
   creator,
-  currentlink,
+  //   currentlink,
   SetOpenBar,
 }: {
   roomId: string;
