@@ -7,7 +7,7 @@ const LoginButton = () => {
   const { isSignedIn } = useAuth();
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex items-center">
       {isSignedIn ? (
         <SignOutButton>
           <div className="group relative">

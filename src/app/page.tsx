@@ -14,6 +14,7 @@ import RoomControls from "@/components/RoomControl";
 import SlidingSidebar from "@/components/SlidingSideBar";
 import { useBackground } from "./useContext/bgContext";
 
+
 type Room = {
   type: string;
   id: string;
@@ -122,7 +123,7 @@ const Home = () => {
         handleJoinRoom={handleJoinRoom}
         loading={loading}
       />
-
+      
       {/* Popup lỗi */}
       {error && (
         <div className="absolute top-10 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-md">

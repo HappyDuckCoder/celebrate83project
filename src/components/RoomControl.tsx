@@ -3,8 +3,8 @@
 import React from "react";
 import LoginButton from "./LoginButton";
 import RoomAction from "./RoomAction";
-// import { PlusCircle, DoorOpen } from "lucide-react";
 import { PlusIcon, ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
+import JoinRoomButton from "./JoinRoomButton";
 
 const RoomControls = ({
   nameGarden,
@@ -49,6 +49,7 @@ const RoomControls = ({
         setValue={setIdGarden}
         handleAction={handleJoinRoom}
       />
+      <JoinRoomButton/>
     </div>
   );
 };
