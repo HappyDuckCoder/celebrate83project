@@ -10,7 +10,7 @@ This project is built to celebrate Women's Day on March 8th by providing an inte
 
 ## Supporters:
 
-- **Đặng Kiều My** - Contribution: [UX/UI]
+- **Đặng Lữ Kiều My** - Contribution: [UX/UI]
 - **Bùi Quang Hùng** - Contribution: [Feedback]
 - **Nguyễn Anh Khoa** - Contribution: [Testing]
 
@@ -120,4 +120,3 @@ Use ShadCN components for a consistent and modern design system
 - Tailwind CSS setup: [Tailwind CSS](https://tailwindcss.com/docs/installation)
 - TypeScript setup: [TypeScript](https://www.typescriptlang.org/docs/)
 
-# hihihaha
