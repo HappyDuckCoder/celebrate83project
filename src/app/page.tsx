@@ -5,8 +5,6 @@ import { getCurrentUser } from "@/lib/action/user.action";
 import { Lobster, Poppins } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-// import RightSidebar from "@/components/SideBar";
-// import { SpeakerHigh, SpeakerSlash } from "phosphor-react";
 
 const lobster = Lobster({ weight: "400", subsets: ["latin"] });
 const poppins = Poppins({ weight: ["400", "500", "700"], subsets: ["latin"] });
@@ -36,39 +34,6 @@ const Home = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
-
-    //   const [toggled, setToggled] = useState(true);
-    // const [soundOn, setSoundOn] = useState(null);
-    // const [soundOff, setSoundOff] = useState(null);
-
-    useEffect(() => {
-        // setSoundOn(new Audio("/sounds/soundOn.mp3"));
-        // setSoundOff(new Audio("/sounds/soundOff.mp3"));
-    }, []);
-
-    // const toggleSound = () => {
-    //     setToggled(!toggled);
-
-    //     if (toggled && soundOff) {
-    //         soundOff.play();
-    //     } else if (!toggled && soundOn) {
-    //         soundOn.play();
-    //     }
-    // };
-    // const router = useRouter();
-
-    // const handleClick = () => {
-    //     setToggled(!toggled);
-    //     // toggleSound();
-    // };
-
-    // const handleGetRooms = () => {
-    //     router.push("/classes");
-    // };
-
-    // const handleLogin = () => {
-    //     console.log("Login button clicked");
-    // };
 
     // Hiển thị HelloScreen trong 2.5s trước khi vào trang chính
     useEffect(() => {
@@ -116,7 +81,6 @@ const Home = () => {
                 title: nameGarden,
                 userId: user_.id,
                 userEmail: user_.email,
-                // default
                 linkBackground:
                     "https://files.edgestore.dev/s138ry1152g81ps2/publicFiles/_public/9db91360-9a96-450f-adc9-f670b414580d.png",
             });

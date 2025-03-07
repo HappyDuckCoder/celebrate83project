@@ -1,6 +1,8 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import { getRoomBackground } from "@/lib/action/room.action";
+import { useParams } from "next/navigation";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 type BackgroundContextType = {
     backgroundImage: string;
@@ -11,13 +13,27 @@ const BackgroundContext = createContext<BackgroundContextType | undefined>(
     undefined
 );
 
-export const BackgroundProvider = ({
+export const BackgroundProvider =  ({
     children,
 }: {
     children: React.ReactNode;
 }) => {
     const [backgroundImage, setBackgroundImage] = useState("/png/bg.png");
+    const params = useParams();
+    const roomId = params.id;
 
+    useEffect(() => {
+        if (!roomId) return;
+
+        const fetchBackground = async () => {
+            if(roomId) {
+                const bgUrl = await getRoomBackground(roomId);
+                if (bgUrl) setBackgroundImage(bgUrl);
+            }
+        };
+
+        fetchBackground();
+    }, [roomId]);
     return (
         <BackgroundContext.Provider
             value={{ backgroundImage, setBackgroundImage }}

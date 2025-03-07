@@ -152,7 +152,7 @@ function RoomContent({
         <div
             className="flex flex-col h-full justify-center items-center"
             style={{
-                backgroundImage: `url(${currentlink})`,
+                // backgroundImage: `url(${currentlink})`,
                 backgroundSize: "cover",
             }}
         >

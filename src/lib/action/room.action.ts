@@ -86,3 +86,13 @@ export const UpdateBackground = async ({
     console.log(`Error updating background: ${error}`);
   }
 };
+
+export const getRoomBackground = async (roomId: string) => {
+  try {
+    const room = await liveblocks.getRoom(roomId); 
+    return room.metadata.backgroundImage || "";
+  } catch (error) {
+    console.error(`Error fetching background: ${error}`);
+    return null;
+  }
+};
