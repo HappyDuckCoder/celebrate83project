@@ -29,16 +29,71 @@ type RoomData = {
   data: Room[];
 };
 
+const masterRoomId =
+  process.env.NEXT_PUBLIC_MASTER_ROOM_ID || "mWu2Vaq7Mn9QFKeHV7sqU";
+
+const RoomMetadataOfMasterRoom = {
+  title: "Master Room",
+  userEmail: "prto2802@gmail.com",
+  creatorId: "duckilot",
+  backgroundImage: "",
+};
+
 const Home = () => {
+  const { setBackgroundImage } = useBackground();
   const [isLoading, setIsLoading] = useState(true);
   const [nameGarden, setNameGarden] = useState<string>("");
   const [idGarden, setIdGarden] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const { setBackgroundImage } = useBackground();
+  const [user, setUser] = useState<{ id: string; email: string } | null>(null);
   const router = useRouter();
+  const [idRoom, setIdRoom] = useState<string>("");
 
-  // Hiển thị HelloScreen trong 2.5s trước khi vào trang chính
+  // ✅ Lấy thông tin user
+  const fetchUser = async () => {
+    const user_ = await getCurrentUser();
+
+    // console.log("what user:", user_); // *Note: debug
+
+    if (user_) {
+      setUser(user_);
+    }
+  };
+
+  // ✅ Lấy roomId dựa vào user
+  const fetchRoomId = async () => {
+    if (!user) return; // Nếu user null, không chạy tiếp
+
+    const roomData = await getDocuments();
+    if (roomData && Array.isArray(roomData.data)) {
+      const existingRoom = roomData.data.find(
+        (roomdata: Room) => roomdata.metadata.userEmail === user.email
+      );
+
+      if (existingRoom) {
+        // console.log("what room:", existingRoom); // *Note: debug
+        setIdRoom(existingRoom.id);
+      }
+    }
+  };
+
+  // ✅ Gọi fetchUser trước, sau đó mới fetchRoomId khi user đã có dữ liệu
+  useEffect(() => {
+    const fetchUserAndRoom = async () => {
+      await fetchUser(); // Chờ user được cập nhật
+    };
+    fetchUserAndRoom();
+  }, []);
+
+  // ✅ Chỉ gọi fetchRoomId khi user thay đổi
+  useEffect(() => {
+    if (user) {
+      fetchRoomId();
+    }
+  }, [user, fetchRoomId]);
+
+  // ✅ Hiển thị HelloScreen trong 2.5s trước khi vào trang chính
   useEffect(() => {
     const timer = setTimeout(() => {
       setBackgroundImage("/png/bg.png");
@@ -48,6 +103,7 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, [setBackgroundImage]);
 
+  // ✅ Xử lý tạo phòng
   const handleCreateRoom = async () => {
     if (!nameGarden.trim()) {
       setError("Tên phòng không được để trống!");
@@ -56,12 +112,9 @@ const Home = () => {
     setLoading(true);
 
     try {
-      const user_ = await getCurrentUser();
-      if (!user_) {
+      if (!user) {
         setError("Bạn chưa đăng nhập!");
-
         router.push("/sign-in");
-
         setLoading(false);
         return;
       }
@@ -70,7 +123,7 @@ const Home = () => {
 
       if (roomsData && Array.isArray(roomsData.data)) {
         const existingRoom = roomsData.data.find(
-          (roomdata: Room) => roomdata.metadata.userEmail === user_.email
+          (roomdata: Room) => roomdata.metadata.userEmail === user.email
         );
 
         if (existingRoom) {
@@ -82,9 +135,8 @@ const Home = () => {
 
       const room = await createDocument({
         title: nameGarden,
-        userId: user_.id,
-        userEmail: user_.email,
-        // default
+        userId: user.id,
+        userEmail: user.email,
         linkBackground: "",
       });
 
@@ -99,12 +151,12 @@ const Home = () => {
     }
   };
 
+  // ✅ Xử lý tham gia phòng
   const handleJoinRoom = async () => {
     if (!idGarden.trim()) {
       setError("ID phòng không được để trống!");
       return;
     }
-
     router.push(`/classes/${idGarden}`);
   };
 
@@ -149,8 +201,14 @@ const Home = () => {
           Chung tay tạo những bông hoa <br></br>chúc mừng ngày 8/3
         </p>
       </div>
+      <p>Phòng của bạn nè: </p>
+      <p>{idRoom}</p>
 
-      <SlidingSidebar />
+      <SlidingSidebar
+        roomId={masterRoomId}
+        RoomMetadata={RoomMetadataOfMasterRoom}
+        isCreator={false}
+      />
     </main>
   );
 };
