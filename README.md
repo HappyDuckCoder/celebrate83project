@@ -1,7 +1,7 @@
 # Introduction
 
 This project is built to celebrate Women's Day on March 8th by providing an interactive and engaging web experience. Our goal is to create a unique and visually appealing application that allows users to send heartfelt messages, share memories, and interact in real time. By leveraging modern web technologies, we aim to deliver a smooth and immersive experience for all visitors.
-Hello
+
 ## Members:
 
 - **Trần Hải Đức** - Role: [Backend]
@@ -10,7 +10,7 @@ Hello
 
 ## Supporters:
 
-- **Đặng Kiều My** - Contribution: [UX/UI]
+- **Đặng Lữ Kiều My** - Contribution: [UX/UI]
 - **Bùi Quang Hùng** - Contribution: [Feedback]
 - **Nguyễn Anh Khoa** - Contribution: [Testing]
 
